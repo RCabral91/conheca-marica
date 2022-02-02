@@ -19,7 +19,8 @@ const breadcrumbData = [
 ];
 
 const Hotels: React.FC = () => {
-  const { hotels, categories, search, setSearch, getHotels } = useHotels();
+  const { hotels, categories, searchText, setSearchText, getHotels } =
+    useHotels();
 
   useEffect(() => {
     getHotels();
@@ -44,7 +45,7 @@ const Hotels: React.FC = () => {
               </div>
               <div className="input input-display">
                 <SearchInput
-                  onSearch={setSearch}
+                  onSearch={setSearchText}
                   placeholder="Buscar pontos turísticos"
                 />
               </div>

@@ -16,8 +16,8 @@ interface IHotelsContextProps {
   categories: CategoryType[];
   isLoading: boolean;
   errorMessage: string | null;
-  search: string;
-  setSearch(text: string): void;
+  searchText: string;
+  setSearchText(text: string): void;
   // setHotel: (hotel: HotelType | null) => void;
   // getHotel: (id: number) => Promise<void>;
   getHotels: () => Promise<void>;
@@ -51,7 +51,7 @@ export const HotelsProvider: React.FC = ({ children }) => {
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
-  const [search, setSearch] = useState('');
+  const [searchText, setSearchText] = useState('');
 
   const getHotels = useCallback(async (): Promise<void> => {
     if (!alreadyGot) {
@@ -83,23 +83,23 @@ export const HotelsProvider: React.FC = ({ children }) => {
       // hotel,
       hotels,
       categories,
-      search,
+      searchText,
       isLoading,
       errorMessage,
       // setCategories,
-      setSearch,
+      setSearchText,
       // getHotel,
       getHotels,
     }),
     [
       // hotel,
       hotels,
-      search,
+      searchText,
       categories,
       isLoading,
       errorMessage,
 
-      setSearch,
+      setSearchText,
       // getHotel,
       getHotels,
     ]

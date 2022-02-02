@@ -101,7 +101,7 @@ export const Header: React.FC = () => {
           <div className="container">
             <div className="row">
               <div className="col">
-                <div className="d-flex justify-content-between align-items-center">
+                <div className="d-flex text-white justify-content-between align-items-center">
                   <button type="button" onClick={() => setShowMenu(!showMenu)}>
                     <FaBars className="fs-4 m-3" />
                     <span className="d-none d-md-inline">Menu</span>

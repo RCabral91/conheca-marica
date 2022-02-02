@@ -66,13 +66,18 @@ export const GlobalStyle = createGlobalStyle`
     border-color: var(--primary);
 
     &:hover {
-    background-color: red;
-    border-color: red;
+    background-color: rgb(52,118,146);
+    border-color: rgb(52,118,146);
     }
   }
 
   .btn-secondary {
     background-color: var(--secondary);
     border-color: var(--secondary);
+
+    &:hover {
+      background-color: rgb(125, 215, 0);
+    border-color: rgb(125, 215, 0);
+    }
   }
 `;

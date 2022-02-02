@@ -21,12 +21,16 @@ const breadcrumbData = [
 ];
 
 const TouristHotspots: React.FC = () => {
-  const { spots, categories, search, setSearch, getSpots } = useSpots();
+  const { spots, categories, getSpots } = useSpots();
 
   useEffect(() => {
     getSpots();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleSearch = (searchText: string): void => {
+    getSpots(searchText);
+  };
 
   return (
     <>
@@ -46,7 +50,7 @@ const TouristHotspots: React.FC = () => {
               </div>
               <div className="input input-display">
                 <SearchInput
-                  onSearch={setSearch}
+                  onSearch={handleSearch}
                   placeholder="Buscar pontos turísticos"
                 />
               </div>

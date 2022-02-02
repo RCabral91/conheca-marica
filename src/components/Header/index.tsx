@@ -39,57 +39,57 @@ export const Header: React.FC = () => {
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/sobre-a-cidade">
               <AiOutlineInfoCircle /> Sobre a Cidade
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/pontos-turisticos">
               <FaUmbrellaBeach /> Pontos Turísticos
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/hoteis-e-pousadas">
               <FaBed /> Hotéis e Pousadas
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/bares-e-restaurantes">
               <MdOutlineRestaurant /> Bares e Restaurantes
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/delivery">
               <FaMotorcycle /> Delivery
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/comercio-local">
               <SiHomeassistantcommunitystore /> Comércio Local
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/cupons-de-desconto">
               <BsBookmarkStarFill /> Cupons de Desconto
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/espacos-para-eventos">
               <GiMicrophone /> Espaços para Eventos
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/eventos">
               <RiCalendar2Fill /> Eventos
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/roteiros-turisticos">
               <FaRoute /> Roteiros Turísticos
             </Link>
           </li>
           <li>
-            <Link to="/">
+            <Link to="/artesanato">
               <MdLocalFlorist /> Artesanato
             </Link>
           </li>
@@ -103,15 +103,39 @@ export const Header: React.FC = () => {
               <div className="col">
                 <div className="d-flex justify-content-between align-items-center">
                   <button type="button" onClick={() => setShowMenu(!showMenu)}>
-                    <FaBars className="fs-4 mx-3" />
+                    <FaBars className="fs-4 m-3" />
                     <span className="d-none d-md-inline">Menu</span>
                   </button>
                   <img src={conhecamarica} alt="Maricá" />
                   <div className="d-none d-md-flex">
-                    <FaFacebook className="fs-5 text-white" />
-                    <FaInstagram className="fs-5 text-white mx-2" />
-                    <FaTwitter className="fs-5 text-white" />
-                    <FaYoutube className="fs-5 text-white ms-2" />
+                    <a
+                      href="https://www.facebook.com/prefeiturademarica?_rdc=1&_rdr"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <FaFacebook className="fs-5 text-white" />
+                    </a>
+                    <a
+                      href="https://www.instagram.com/prefeiturademarica/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <FaInstagram className="fs-5 text-white mx-2" />
+                    </a>
+                    <a
+                      href="https://twitter.com/MaricaRJ"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <FaTwitter className="fs-5 text-white" />
+                    </a>
+                    <a
+                      href="https://www.youtube.com/user/prefeiturademarica1"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <FaYoutube className="fs-5 text-white ms-2" />
+                    </a>
                   </div>
                 </div>
               </div>

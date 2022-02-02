@@ -9,7 +9,7 @@ export const Menu = styled.nav`
   padding: 30px 0 90px;
   overflow: auto;
   z-index: 2;
-  background: var(--menucolor);
+  background: var(--black90);
 
   li {
     margin-top: 30px;
@@ -43,7 +43,7 @@ export const Menu = styled.nav`
 `;
 
 export const Container = styled.header`
-  background: var(--blueone);
+  background: var(--primary);
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
@@ -51,7 +51,6 @@ export const Container = styled.header`
 `;
 
 export const Content = styled.div`
-  max-width: 1200px;
   margin: 0 auto;
   padding: 1rem 1rem 1rem;
   display: flex;

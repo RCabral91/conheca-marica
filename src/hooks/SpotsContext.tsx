@@ -60,7 +60,10 @@ export const SpotsProvider: React.FC = ({ children }) => {
     Api.get(url)
       .then(response => {
         setSpots(response.data.collection);
-        setCategories(response.data.categories);
+
+        if (response.data.categorias) {
+          setCategories(response.data.categorias);
+        }
       })
       .catch(() => {
         setSpots([]);

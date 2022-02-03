@@ -1,5 +1,7 @@
 import { BannersProvider } from './hooks/BannerContext';
+import { CommercesProvider } from './hooks/CommerceContext';
 import { HotelsProvider } from './hooks/HotelsContext';
+import { PubsNRestsProvider } from './hooks/PubsNRestsContext';
 import { SpotsProvider } from './hooks/SpotsContext';
 import { Routes } from './Routes';
 
@@ -11,7 +13,11 @@ const App: React.FC = () => {
       <BannersProvider>
         <HotelsProvider>
           <SpotsProvider>
-            <Routes />
+            <PubsNRestsProvider>
+              <CommercesProvider>
+                <Routes />
+              </CommercesProvider>
+            </PubsNRestsProvider>
           </SpotsProvider>
         </HotelsProvider>
       </BannersProvider>

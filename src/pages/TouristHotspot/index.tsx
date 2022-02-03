@@ -16,7 +16,7 @@ const TouristHotspot: React.FC = () => {
   const { isLoading, spot } = useSpots();
   const { id } = useParams();
   useEffect(() => {
-    useSpots(parseInt(id ?? '', 10));
+    getSpots(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -5,7 +5,6 @@ export const BreadcrumbStyle = styled.div`
     text-decoration: none;
     font-size: 28px;
     color: black;
-    padding: 5px;
     font-weight: 700;
   }
 `;

@@ -2,9 +2,10 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   :root {
-    --primary: rgb(45, 103, 127);
-    --secondary: rgb(110, 189, 0);
+    --primary: #2d677f;
+    --secondary: #6ebd00;
     --black90: rgba(0, 0, 0, 0.9); 
+    --gray-dark: #343a40;
   }
   
   * {
@@ -41,8 +42,8 @@ export const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
     .button-secondary.button-outline {
-    color: rgb(110, 189, 0);
-    border: 1px solid rgb(110, 189, 0);
+    color: #6ebd00;
+    border: 1px solid #6ebd00;
     background-color: transparent;
     }
   }
@@ -66,8 +67,8 @@ export const GlobalStyle = createGlobalStyle`
     border-color: var(--primary);
 
     &:hover {
-    background-color: rgb(52,118,146);
-    border-color: rgb(52,118,146);
+    background-color: #347692;
+    border-color: #347692;
     }
   }
 
@@ -76,8 +77,15 @@ export const GlobalStyle = createGlobalStyle`
     border-color: var(--secondary);
 
     &:hover {
-      background-color: rgb(125, 215, 0);
-    border-color: rgb(125, 215, 0);
+      background-color: #7dd700;
+    border-color: #7dd700;
     }
+  }
+  .text-primary {
+    color: var(--primary) !important;
+  }
+
+  .text-secondary {
+    color: var(--secondary);
   }
 `;

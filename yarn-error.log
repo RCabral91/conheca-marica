@@ -1,30 +1,30 @@
 Arguments: 
-  /usr/bin/node /usr/local/bin/yarn add @typescript-react-router-dom
+  /usr/local/bin/node /usr/local/bin/yarn add react-app exemplo-google-maps-e-react
 
 PATH: 
-  /home/rafael/.zinit/polaris/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+  /home/rafael/.local/share/zinit/polaris/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 
 Yarn version: 
   1.22.17
 
 Node version: 
-  14.18.1
+  16.13.2
 
 Platform: 
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@typescript-react-router-dom: Request "https://registry.yarnpkg.com/@typescript-react-router-dom" returned a 405
-      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:67038:18)
+  Error: https://registry.yarnpkg.com/exemplo-google-maps-e-react: Not found
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:67029:18)
       at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140883:22)
-      at Request.emit (events.js:400:28)
+      at Request.emit (node:events:390:28)
       at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141855:10)
-      at Request.emit (events.js:400:28)
+      at Request.emit (node:events:390:28)
       at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141777:12)
-      at Object.onceWrapper (events.js:519:28)
-      at IncomingMessage.emit (events.js:412:35)
-      at endReadableNT (internal/streams/readable.js:1334:12)
-      at processTicksAndRejections (internal/process/task_queues.js:82:21)
+      at Object.onceWrapper (node:events:509:28)
+      at IncomingMessage.emit (node:events:402:35)
+      at endReadableNT (node:internal/streams/readable:1343:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
 
 npm manifest: 
   {
@@ -32,6 +32,7 @@ npm manifest:
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+      "axios": "^0.25.0",
       "eslint-plugin-import": "^2.25.4",
       "eslint-plugin-jsx-a11y": "^6.5.1",
       "eslint-plugin-react-hooks": "^4.3.0",
@@ -40,8 +41,10 @@ npm manifest:
       "react-dom": "^17.0.2",
       "react-hooks": "^1.0.1",
       "react-icons": "^4.3.1",
+      "react-inlinesvg": "^2.3.0",
       "react-router-dom": "^6.2.1",
       "react-scripts": "5.0.0",
+      "react-slick": "^0.28.1",
       "styled-components": "^5.3.3",
       "web-vitals": "^2.1.0"
     },
@@ -55,6 +58,8 @@ npm manifest:
       "@types/node": "^12.0.0",
       "@types/react": "^17.0.0",
       "@types/react-dom": "^17.0.0",
+      "@types/react-inlinesvg": "^1.0.0",
+      "@types/react-slick": "^0.23.8",
       "@types/styled-components": "^5.1.15",
       "@typescript-eslint/eslint-plugin": "^5.4.0",
       "@typescript-eslint/parser": "^5.4.0",
@@ -1989,6 +1994,20 @@ Lockfile:
     dependencies:
       "@types/react" "*"
   
+  "@types/react-inlinesvg@^1.0.0":
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/@types/react-inlinesvg/-/react-inlinesvg-1.0.0.tgz#c7c1e24afe26e67ae7608ab4b3a6ff3ede3b0782"
+    integrity sha512-KV9aRzRSQzfq8PFMROlt+We5UVTzJHReYW1670SrFA05qCwch1u2gafeKnXbYaqQr8odc913wT0LEzARZ7ckkg==
+    dependencies:
+      react-inlinesvg "*"
+  
+  "@types/react-slick@^0.23.8":
+    version "0.23.8"
+    resolved "https://registry.yarnpkg.com/@types/react-slick/-/react-slick-0.23.8.tgz#91654e657158da57f082c7b213e20756d3a37502"
+    integrity sha512-SfzSg++/3uyftVZaCgHpW+2fnJFsyJEQ/YdsuqfOWQ5lqUYV/gY/UwAnkw4qksCj5jalto/T5rKXJ8zeFldQeA==
+    dependencies:
+      "@types/react" "*"
+  
   "@types/react-transition-group@^4.4.1":
     version "4.4.4"
     resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.4.4.tgz#acd4cceaa2be6b757db61ed7b432e103242d163e"
@@ -2626,6 +2645,13 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.3.5.tgz#78d6911ba317a8262bfee292aeafcc1e04b49cc5"
     integrity sha512-WKTW1+xAzhMS5dJsxWkliixlO/PqC4VhmO9T4juNYcaTg9jzWiJsou6m5pxWYGfigWbwzJWeFY6z47a+4neRXA==
   
+  axios@^0.25.0:
+    version "0.25.0"
+    resolved "https://registry.yarnpkg.com/axios/-/axios-0.25.0.tgz#349cfbb31331a9b4453190791760a8d35b093e0a"
+    integrity sha512-cD8FOb0tRH3uuEe6+evtAbgJtfxr7ly3fQjYcMcuPlgkwVS9xboaVIpcDV+cYQe+yGykgwZCs1pzjntcGa6l5g==
+    dependencies:
+      follow-redirects "^1.14.7"
+  
   axobject-query@^2.2.0:
     version "2.2.0"
     resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-2.2.0.tgz#943d47e10c0b704aa42275e20edf3722648989be"
@@ -3051,7 +3077,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/cjs-module-lexer/-/cjs-module-lexer-1.2.2.tgz#9f84ba3244a512f3a54e5277e8eef4c489864e40"
     integrity sha512-cOU9usZw8/dXIXKtwa8pM0OTJQuJkxMN6w30csNRUerHfeQ5R6U3kkU/FtJeIf3M202OHfY2U8ccInBG7/xogA==
   
-  classnames@^2.3.1:
+  classnames@^2.2.5, classnames@^2.3.1:
     version "2.3.1"
     resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
     integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==
@@ -3879,6 +3905,11 @@ Lockfile:
       graceful-fs "^4.2.4"
       tapable "^2.2.0"
   
+  enquire.js@^2.1.6:
+    version "2.1.6"
+    resolved "https://registry.yarnpkg.com/enquire.js/-/enquire.js-2.1.6.tgz#3e8780c9b8b835084c3f60e166dbc3c2a3c89814"
+    integrity sha1-PoeAybi4NQhMP2DhZtvDwqPImBQ=
+  
   enquirer@^2.3.5:
     version "2.3.6"
     resolved "https://registry.yarnpkg.com/enquirer/-/enquirer-2.3.6.tgz#2a7fe5dd634a1e4125a975ec994ff5456dc3734d"
@@ -4389,6 +4420,11 @@ Lockfile:
       signal-exit "^3.0.3"
       strip-final-newline "^2.0.0"
   
+  exenv@^1.2.2:
+    version "1.2.2"
+    resolved "https://registry.yarnpkg.com/exenv/-/exenv-1.2.2.tgz#2ae78e85d9894158670b03d47bec1f03bd91bb9d"
+    integrity sha1-KueOhdmJQVhnCwPUe+wfA72Ru50=
+  
   exit@^0.1.2:
     version "0.1.2"
     resolved "https://registry.yarnpkg.com/exit/-/exit-0.1.2.tgz#0632638f8d877cc82107d30a0fff1a17cba1cd0c"
@@ -4591,7 +4627,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.2.4.tgz#28d9969ea90661b5134259f312ab6aa7929ac5e2"
     integrity sha512-8/sOawo8tJ4QOBX8YlQBMxL8+RLZfxMQOif9o0KUKTNTjMYElWPE0r/m5VNFxTRd0NSw8qSy8dajrwX4RYI1Hw==
   
-  follow-redirects@^1.0.0:
+  follow-redirects@^1.0.0, follow-redirects@^1.14.7:
     version "1.14.7"
     resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.7.tgz#2004c02eb9436eee9a21446a6477debf17e81685"
     integrity sha512-+hbxoLbFMbRKDwohX8GkTataGqO6Jb7jGwpAlwgy2bIz25XtRm7KEzJM76R1WiNT5SwZkX4Y75SwBolkpmE7iQ==
@@ -5920,6 +5956,13 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
     integrity sha1-nbe1lJatPzz+8wp1FC0tkwrXJlE=
+  
+  json2mq@^0.2.0:
+    version "0.2.0"
+    resolved "https://registry.yarnpkg.com/json2mq/-/json2mq-0.2.0.tgz#b637bd3ba9eabe122c83e9720483aeb10d2c904a"
+    integrity sha1-tje9O6nqvhIsg+lyBIOusQ0skEo=
+    dependencies:
+      string-convert "^0.2.0"
   
   json5@^1.0.1:
     version "1.0.1"
@@ -7472,6 +7515,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.10.tgz#0fe26db4fa85d9dbb8624729580e90e7159a59a6"
     integrity sha512-mKR90fX7Pm5seCOfz8q9F+66VCc1PGsWSBxKbITjfKVQHMNF2zudxHnMdJiB1fRCb+XsbQV9sO9DCkgsMQgBIA==
   
+  react-from-dom@^0.6.0:
+    version "0.6.1"
+    resolved "https://registry.yarnpkg.com/react-from-dom/-/react-from-dom-0.6.1.tgz#6740f5a3d79e0c354703e5c096b8fdfe0db71b0f"
+    integrity sha512-7aAZx7LhRnmR51W5XtmTBYHGFl2n1AdEk1uoXLuzHa1OoGXrxOW/iwLcudvgp6BGX/l4Yh1rtMrIzvhlvbVddg==
+  
   react-hooks@^1.0.1:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/react-hooks/-/react-hooks-1.0.1.tgz#e62197c38cd8d0703060f791234f7f4698aa7c44"
@@ -7481,6 +7529,14 @@ Lockfile:
     version "4.3.1"
     resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.3.1.tgz#2fa92aebbbc71f43d2db2ed1aed07361124e91ca"
     integrity sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ==
+  
+  react-inlinesvg@*, react-inlinesvg@^2.3.0:
+    version "2.3.0"
+    resolved "https://registry.yarnpkg.com/react-inlinesvg/-/react-inlinesvg-2.3.0.tgz#62283c0ce7e9d11d8190ec3e89589102288830fd"
+    integrity sha512-fEGOdDf4k4bcveArbEpj01pJcH8pOCKLxmSj2POFdGvEk5YK0NZVnH6BXpW/PzACHPRsuh1YKAhNZyFnD28oxg==
+    dependencies:
+      exenv "^1.2.2"
+      react-from-dom "^0.6.0"
   
   react-is@^16.13.1, react-is@^16.3.2, react-is@^16.7.0:
     version "16.13.1"
@@ -7571,6 +7627,17 @@ Lockfile:
       workbox-webpack-plugin "^6.4.1"
     optionalDependencies:
       fsevents "^2.3.2"
+  
+  react-slick@^0.28.1:
+    version "0.28.1"
+    resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.28.1.tgz#12c18d991b59432df9c3757ba540a227b3fb85b9"
+    integrity sha512-JwRQXoWGJRbUTE7eZI1rGIHaXX/4YuwX6gn7ulfvUZ4vFDVQAA25HcsHSYaUiRCduTr6rskyIuyPMpuG6bbluw==
+    dependencies:
+      classnames "^2.2.5"
+      enquire.js "^2.1.6"
+      json2mq "^0.2.0"
+      lodash.debounce "^4.0.8"
+      resize-observer-polyfill "^1.5.0"
   
   react-transition-group@^4.4.1:
     version "4.4.2"
@@ -7730,6 +7797,11 @@ Lockfile:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
     integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
+  
+  resize-observer-polyfill@^1.5.0:
+    version "1.5.1"
+    resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
+    integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
   
   resolve-cwd@^3.0.0:
     version "3.0.0"
@@ -8187,6 +8259,11 @@ Lockfile:
     version "1.5.0"
     resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
     integrity sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=
+  
+  string-convert@^0.2.0:
+    version "0.2.1"
+    resolved "https://registry.yarnpkg.com/string-convert/-/string-convert-0.2.1.tgz#6982cc3049fbb4cd85f8b24568b9d9bf39eeff97"
+    integrity sha1-aYLMMEn7tM2F+LJFaLnZvznu/5c=
   
   string-length@^4.0.1:
     version "4.0.2"

@@ -20,6 +20,9 @@ import { SiHomeassistantcommunitystore } from 'react-icons/si';
 import conhecamarica from '../../assets/conhecamarica.png';
 import { Container, Content, Menu } from './styles';
 
+const routesUrl = process.env.REACT_APP_ROUTES_URL ?? '';
+const craftUrl = process.env.REACT_APP_CRAFT_URL ?? '';
+
 export const Header: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);
 
@@ -83,16 +86,20 @@ export const Header: React.FC = () => {
               <RiCalendar2Fill /> Eventos
             </Link>
           </li>
-          <li>
-            <Link to="/roteiros-turisticos">
-              <FaRoute /> Roteiros Turísticos
-            </Link>
-          </li>
-          <li>
-            <Link to="/artesanato">
-              <MdLocalFlorist /> Artesanato
-            </Link>
-          </li>
+          {routesUrl && (
+            <li>
+              <a href={routesUrl} target="_blank" rel="noreferrer">
+                <FaRoute /> Roteiros Turísticos
+              </a>
+            </li>
+          )}
+          {craftUrl && (
+            <li>
+              <a href={craftUrl} target="_blank" rel="noreferrer">
+                <MdLocalFlorist /> Artesanato
+              </a>
+            </li>
+          )}
         </ul>
       </Menu>
 

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const SearchStyle = styled.div`
   .input {
     padding: 0px 15px;
-    width: 100%;
     border: none;
     background-color: transparent;
   }

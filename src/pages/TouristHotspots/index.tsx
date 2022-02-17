@@ -21,7 +21,7 @@ const breadcrumbData = [
 ];
 
 const TouristHotspots: React.FC = () => {
-  const { spots, categories, getSpots } = useSpots();
+  const { spots, isLoading, categories, getSpots } = useSpots();
 
   useEffect(() => {
     getSpots();
@@ -48,12 +48,11 @@ const TouristHotspots: React.FC = () => {
               <div className="me-3">
                 <Map />
               </div>
-              <div className="input input-display">
-                <SearchInput
-                  onSearch={handleSearch}
-                  placeholder="Buscar pontos turísticos"
-                />
-              </div>
+
+              <SearchInput
+                onSearch={handleSearch}
+                placeholder="Buscar pontos turísticos"
+              />
             </div>
           </div>
           <Categories
@@ -61,15 +60,19 @@ const TouristHotspots: React.FC = () => {
             url="pontos-turisticos"
             color="secondary"
           />
-          <div className="row row-cols-3 ps-2">
-            {spots.map(spot => {
-              return (
-                <div key={spot.id} className="col align-items-stretch d-flex">
-                  <SpotCard spot={spot} />
-                </div>
-              );
-            })}
-          </div>
+          {isLoading ? (
+            <p>Carregando</p>
+          ) : (
+            <div className="row row-cols-3 ps-2">
+              {spots.map(spot => {
+                return (
+                  <div key={spot.id} className="col align-items-stretch d-flex">
+                    <SpotCard spot={spot} />
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </Container>
       </Main>
       <Footer />

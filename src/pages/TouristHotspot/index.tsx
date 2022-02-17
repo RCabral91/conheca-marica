@@ -1,60 +1,117 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-// import { SpotType } from '../../@types/Spot';
+import About from '../../components/About';
 import Breadcrumb from '../../components/Breadcrumb';
 import { Categories } from '../../components/Categories';
 import Container from '../../components/Container';
+import { DownloadApp } from '../../components/DownloadApp';
+import EntryValue from '../../components/EntryValue';
 import { Footer } from '../../components/Footer';
 import { Header } from '../../components/Header';
+import Informations from '../../components/Informations';
+
 import Main from '../../components/Main';
 import PageTitle from '../../components/PageTitle';
+import Tips from '../../components/Tips';
+
 import { useSpots } from '../../hooks/SpotsContext';
-// import { SearchInput } from '../../components/SearchInput';
-// import Main from '../../components/Main';
+
+const breadcrumbData = [
+  {
+    title: 'Pontos Turísticos',
+    backTo: '/pontos-turisticos',
+  },
+];
 
 const TouristHotspot: React.FC = () => {
-  const { isLoading, spot } = useSpots();
+  const { spot, setSpot, getSpot } = useSpots();
   const { id } = useParams();
   useEffect(() => {
-    getSpots(parseInt(id ?? '', 10));
+    setSpot(null);
+    getSpot(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const breadcrumbData = [
-    {
-      title: 'Pontos Turísticos',
-      backTo: '/',
-    },
-  ];
 
   return (
     <>
       <Header />
       <Main>
         <Container>
-          <div className="row pt-3 pt-md-4 pb-4">
-            <div className="col-md-6">
-              <div className="d-flex align-items-center mb-4 mb-md-0">
-                <Breadcrumb data={breadcrumbData} />
-                <PageTitle title="Pontos Turísticos" />
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-8">
+                <div className="d-flex">
+                  <Breadcrumb data={breadcrumbData} />
+                  <PageTitle title={spot?.nome ?? 'Carregando...'} />
+                </div>
+                {spot && (
+                  <>
+                    <Categories
+                      categories={spot.categorias}
+                      url="/pontos"
+                      color="secondary"
+                    />
+                    <div className="mb-3 fs-5">
+                      <p>{spot.descricao_t}</p>
+                    </div>
+
+                    <About
+                      title="Sobre"
+                      addresses={spot.addresses}
+                      phones={spot.phones}
+                      email={spot?.email}
+                      network={spot.redes}
+                      openingTime={spot.horario_funcionamento}
+                    />
+
+                    {spot && spot?.dicas_t && (
+                      <Tips title="Dicas" content={spot.dicas_t} />
+                    )}
+
+                    {spot && spot?.preco_t && (
+                      <EntryValue
+                        title="Valor de Entrada"
+                        priceToEntry={spot.preco_t}
+                      />
+                    )}
+
+                    {Array.isArray(spot?.viajantes) &&
+                      spot?.viajantes.length > 0 && (
+                        <Informations
+                          title="Tipos de Viajantes"
+                          contents={spot.viajantes}
+                        />
+                      )}
+
+                    {Array.isArray(spot?.estruturas) &&
+                      spot?.estruturas.length > 0 && (
+                        <Informations
+                          title="Estruturas"
+                          contents={spot.estruturas}
+                        />
+                      )}
+                    {Array.isArray(spot?.restricoes) &&
+                      spot?.restricoes.length > 0 && (
+                        <Informations
+                          title="Restrições"
+                          contents={spot.restricoes}
+                        />
+                      )}
+                    {Array.isArray(spot?.formas_pagamento) &&
+                      spot?.formas_pagamento.length > 0 && (
+                        <Informations
+                          title="Formas de Pagamento"
+                          contents={spot.formas_pagamento}
+                        />
+                      )}
+                  </>
+                )}
+              </div>
+              <div className="col-4">
+                <DownloadApp />
               </div>
             </div>
-            <div className="d-flex col-md-6 g-3" />
           </div>
-          <Categories
-            categories={spot}
-            url="pontos-turisticos"
-            color="secondary"
-          />
-          {/* <div className="row row-cols-3 ps-2">
-            {spot.map(spot => {
-              return (
-              <div key={spot.id} className="col align-items-stretch d-flex">
-       mudar para outro ocmponete  =>   <SpotCard spot={spot} />
-                 </div>
-              );
-            })}
-          </div> */}
         </Container>
       </Main>
       <Footer />

@@ -19,13 +19,16 @@ const breadcrumbData = [
 ];
 
 const Hotels: React.FC = () => {
-  const { hotels, categories, searchText, setSearchText, getHotels } =
-    useHotels();
+  const { hotels, isLoading, categories, getHotels } = useHotels();
 
   useEffect(() => {
     getHotels();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleSearch = (searchText: string): void => {
+    getHotels(searchText);
+  };
 
   return (
     <>
@@ -45,8 +48,8 @@ const Hotels: React.FC = () => {
               </div>
               <div className="input input-display">
                 <SearchInput
-                  onSearch={setSearchText}
-                  placeholder="Buscar pontos turísticos"
+                  onSearch={handleSearch}
+                  placeholder="Buscar hotéis e pousadas"
                 />
               </div>
             </div>
@@ -56,18 +59,22 @@ const Hotels: React.FC = () => {
             url="hoteis-e-pousadas"
             color="secondary"
           />
-          <div className="row row-cols-3">
-            {hotels.map(hotel => {
-              return (
-                <div
-                  key={hotel.id}
-                  className="col d-flex align-items-stretch mt-auto"
-                >
-                  <HotelCard hotel={hotel} />
-                </div>
-              );
-            })}
-          </div>
+          {isLoading ? (
+            <p>Carregando</p>
+          ) : (
+            <div className="row row-cols-3 ps-2">
+              {hotels.map(hotel => {
+                return (
+                  <div
+                    key={hotel.id}
+                    className="col d-flex align-items-stretch"
+                  >
+                    <HotelCard hotel={hotel} />
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </Container>
       </Main>
       <Footer />

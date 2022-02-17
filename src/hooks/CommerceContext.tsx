@@ -11,16 +11,14 @@ import { Api } from '../services/Api';
 
 // Aqui é definida a Interface com os tipos de dados de tudo que será disponibilizado "para fora" do Provider
 interface ICommercesContextProps {
-  // commerce: CommerceType | null;
+  commerce: CommerceType | null;
   commerces: CommerceType[];
   categories: CategoryType[];
   isLoading: boolean;
   errorMessage: string | null;
-  searchText: string;
-  setSearchText(text: string): void;
-  // setCommerce: (commerce: CommerceType | null) => void;
-  // getCommerce: (id: number) => Promise<void>;
-  getCommerces: () => Promise<void>;
+  setCommerce: (commerce: CommerceType | null) => void;
+  getCommerce: (id: number) => Promise<void>;
+  getCommerces: (text?: string) => Promise<void>;
 }
 
 // Aqui é definido o Context (não precisa entender, é sempre exatamente assim)
@@ -43,22 +41,42 @@ export const useCommerces = (): ICommercesContextProps => {
 };
 
 // Aqui são definidas as variáveis de State e as funções do Provider
-
 export const CommercesProvider: React.FC = ({ children }) => {
-  // const [commerce, setCommerce] = useState<CommerceType | null>(null);
+  const [commerce, setCommerce] = useState<CommerceType | null>(null);
   const [commerces, setCommerces] = useState<CommerceType[]>([]);
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
-  const [searchText, setSearchText] = useState('');
+
+  const getCommerce = useCallback(async (searchText): Promise<void> => {
+    let url = `/comercios`;
+
+    if (searchText.length > 0) {
+      url += `/busca?busca=${searchText}`;
+    }
+    Api.get(url)
+      .then(response => {
+        setCommerces(response.data.collection);
+
+        if (response.data.categorias) {
+          setCategories(response.data.categorias);
+        }
+      })
+      .catch(() => {
+        setCommerce(commerce);
+        setCategories([]);
+      })
+      .finally();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const getCommerces = useCallback(async (): Promise<void> => {
     if (!alreadyGot) {
       setLoading(true);
       setErrorMessage(null);
       try {
-        const response = await Api.get(`/comercio-local`);
+        const response = await Api.get(`/comercios`);
 
         if (Array.isArray(response?.data?.collection)) {
           setCommerces(response?.data?.collection);
@@ -80,27 +98,25 @@ export const CommercesProvider: React.FC = ({ children }) => {
   // Aqui são definidas quais informações estarão disponíveis "para fora" do Provider
   const providerValue = useMemo(
     () => ({
-      // commerce,
+      commerce,
       commerces,
       categories,
-      searchText,
       isLoading,
       errorMessage,
-      // setCategories,
-      setSearchText,
-      // getCommerce,
+      setCategories,
+      setCommerce,
+      getCommerce,
       getCommerces,
     }),
     [
-      // commerce,
+      commerce,
       commerces,
-      searchText,
       categories,
       isLoading,
       errorMessage,
-
-      setSearchText,
-      // getCommerce,
+      setCategories,
+      setCommerce,
+      getCommerce,
       getCommerces,
     ]
   );

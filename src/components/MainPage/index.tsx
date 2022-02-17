@@ -11,6 +11,9 @@ import androidImg from '../../assets/androidImg.png';
 import appleImg from '../../assets/appleImg.png';
 import { SiteApp } from './styles';
 
+const routesUrl = process.env.REACT_APP_ROUTES_URL ?? '';
+const craftUrl = process.env.REACT_APP_CRAFT_URL ?? '';
+
 export const MainPage: React.FC = () => {
   return (
     <>
@@ -81,22 +84,26 @@ export const MainPage: React.FC = () => {
               icon={RiCalendar2Fill}
             />
           </div>
-          <div className="col">
-            <Card
-              title="Roteiros turísticos"
-              description="Conheça diversas trilhas ecológicas e de aventura, com variados níveis de dificuldade."
-              url="/roteiros-turisticos"
-              icon={FaRoute}
-            />
-          </div>
-          <div className="col">
-            <Card
-              title="Artesanato"
-              description="Conheça e compre as criações dos artesãos de Maricá/RJ"
-              url="/artesanato"
-              icon={MdLocalFlorist}
-            />
-          </div>
+          {routesUrl && (
+            <div className="col">
+              <Card
+                title="Roteiros turísticos"
+                description="Conheça diversas trilhas ecológicas e de aventura, com variados níveis de dificuldade."
+                url={routesUrl}
+                icon={FaRoute}
+              />
+            </div>
+          )}
+          {craftUrl && (
+            <div className="col">
+              <Card
+                title="Artesanato"
+                description="Conheça e compre as criações dos artesãos de Maricá/RJ"
+                url={craftUrl}
+                icon={MdLocalFlorist}
+              />
+            </div>
+          )}
           <div className="col">
             <Card
               title="Sobre a cidade"

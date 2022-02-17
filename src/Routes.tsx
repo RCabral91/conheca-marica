@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes as Switch, Route } from 'react-router-dom';
 import Commerces from './pages/Commerces';
+import EventsPlaces from './pages/EventsPlaces';
 
 import { Home } from './pages/Home';
 import Hotels from './pages/Hotels';
@@ -18,6 +19,8 @@ export const Routes: React.FC = () => {
         <Route path="/hoteis-e-pousadas/:id" element={<Hotels />} />
         <Route path="/bares-e-restaurantes" element={<PubsNRests />} />
         <Route path="/comercio-local" element={<Commerces />} />
+        <Route path="/comercio-local/:id" element={<Commerces />} />
+        <Route path="/espacos" element={<EventsPlaces />} />
       </Switch>
     </BrowserRouter>
   );

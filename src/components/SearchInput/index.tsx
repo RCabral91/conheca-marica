@@ -14,22 +14,24 @@ export const SearchInput: React.FC<ISearchInputProps> = ({
   const [searchText, setSearchText] = useState('');
   return (
     <SearchStyle>
-      <div className="d-flex">
-        <input
-          onChange={e => setSearchText(e.target.value)}
-          value={searchText}
-          placeholder={placeholder}
-          type="text"
-          className="input input-display form-control"
-        />
-        <button
-          onClick={() => onSearch(searchText)}
-          type="button"
-          className="btn color-white"
-        >
-          <MdSearch />
-        </button>
-      </div>
+      <form className="input-display">
+        <div className="d-flex flex-grow-1">
+          <input
+            onChange={e => setSearchText(e.target.value)}
+            value={searchText}
+            placeholder={placeholder}
+            type="text"
+            className="form-control input"
+          />
+          <button
+            onClick={() => onSearch(searchText)}
+            type="button"
+            className="flex-shrink input color-white"
+          >
+            <MdSearch />
+          </button>
+        </div>
+      </form>
     </SearchStyle>
   );
 };

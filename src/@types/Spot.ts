@@ -11,8 +11,8 @@ export type SpotType = {
   id: number;
   nome: string;
   capa?: string;
-  categorias: CategoryType[];
   enderecos: AddressType[];
+  categorias: CategoryType[];
   addresses: AddressType[];
   images?: ImageType[];
   email?: string;

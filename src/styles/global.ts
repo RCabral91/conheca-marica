@@ -88,4 +88,8 @@ export const GlobalStyle = createGlobalStyle`
   .text-secondary {
     color: var(--secondary);
   }
+
+  .form-control:focus {
+    box-shadow: none;
+  }
 `;

@@ -3,6 +3,7 @@ import Commerces from './pages/Commerces';
 import EventsPlaces from './pages/EventsPlaces';
 
 import { Home } from './pages/Home';
+import Hotel from './pages/Hotel';
 import Hotels from './pages/Hotels';
 import PubsNRests from './pages/PubsNRests';
 import TouristHotspot from './pages/TouristHotspot';
@@ -16,7 +17,7 @@ export const Routes: React.FC = () => {
         <Route path="/pontos-turisticos" element={<TouristHotspots />} />
         <Route path="/pontos-turisticos/:id" element={<TouristHotspot />} />
         <Route path="/hoteis-e-pousadas" element={<Hotels />} />
-        <Route path="/hoteis-e-pousadas/:id" element={<Hotels />} />
+        <Route path="/hoteis-e-pousadas/:id" element={<Hotel />} />
         <Route path="/bares-e-restaurantes" element={<PubsNRests />} />
         <Route path="/comercio-local" element={<Commerces />} />
         <Route path="/comercio-local/:id" element={<Commerces />} />

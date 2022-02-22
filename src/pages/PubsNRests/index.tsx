@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
-import Breadcrumb from '../../components/Breadcrumb';
 import Main from '../../components/Main';
 import Container from '../../components/Container';
 import { Categories } from '../../components/Categories';
@@ -10,13 +9,6 @@ import PageTitle from '../../components/PageTitle';
 import { SearchInput } from '../../components/SearchInput';
 import { usePubsNRests } from '../../hooks/PubsNRestsContext';
 import PubNRestCard from '../../components/PubNRestCard';
-
-const breadcrumbData = [
-  {
-    title: 'Bares e Restaurantes',
-    backTo: '/',
-  },
-];
 
 const PubsNRests: React.FC = () => {
   const { pubsNRests, categories, getPubsNRests } = usePubsNRests();
@@ -38,7 +30,6 @@ const PubsNRests: React.FC = () => {
           <div className="row pt-3 pt-md-4 pb-4">
             <div className="col-md-6">
               <div className="d-flex align-items-center mb-4 mb-md-0">
-                <Breadcrumb data={breadcrumbData} />
                 <PageTitle title="Bares e Restaurantes" />
               </div>
             </div>

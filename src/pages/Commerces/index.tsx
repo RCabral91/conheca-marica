@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import Breadcrumb from '../../components/Breadcrumb';
 import { Categories } from '../../components/Categories';
 import CommerceCard from '../../components/CommerceCard';
 import Container from '../../components/Container';
@@ -10,13 +9,6 @@ import { Map } from '../../components/Map';
 import PageTitle from '../../components/PageTitle';
 import { SearchInput } from '../../components/SearchInput';
 import { useCommerces } from '../../hooks/CommerceContext';
-
-const breadcrumbData = [
-  {
-    title: 'Comércio Local',
-    backTo: '/',
-  },
-];
 
 const Commerces: React.FC = () => {
   const { commerces, isLoading, categories, getCommerces } = useCommerces();
@@ -38,7 +30,6 @@ const Commerces: React.FC = () => {
           <div className="row pt-3 pt-md-4 pb-4">
             <div className="col-md-6">
               <div className="d-flex align-items-center mb-4 mb-md-0">
-                <Breadcrumb data={breadcrumbData} />
                 <PageTitle title="Comércio Local" />
               </div>
             </div>

@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
-import { AiOutlineMail } from 'react-icons/ai';
+import { Fragment } from 'react';
+import { AiOutlineGlobal, AiOutlineMail } from 'react-icons/ai';
 import {
   FaFacebook,
   FaWhatsapp,
@@ -22,7 +23,8 @@ interface IAboutProps {
   phones: PhoneType[];
   email?: string;
   network: NetworkType[];
-  openingTime: OpeningTimeType[];
+  openingTime?: OpeningTimeType[];
+  site?: string;
 }
 
 const icons = {
@@ -40,12 +42,16 @@ const About: React.FC<IAboutProps> = ({
   email,
   network,
   openingTime,
+  site,
 }) => (
   <div className="mt-5">
     <h2 className=" fs-4 border-2 border-bottom">{title}</h2>
     <ul className="fs-5 align-items-center p-0">
       {addresses.map(info => (
-        <li className="d-flex align-items-center list-unstyled col pb-4">
+        <li
+          key="info.id"
+          className="d-flex align-items-center list-unstyled col pb-4"
+        >
           <div className="px-2">
             <IconStyle>
               <FiMapPin />
@@ -84,8 +90,8 @@ const About: React.FC<IAboutProps> = ({
           {network.map(info => {
             const Icon = icons[info.nome];
             return (
-              <>
-                <IconStyle key="info.id" className="px-2">
+              <Fragment key="info.id">
+                <IconStyle className="px-2">
                   <Icon />
                 </IconStyle>
                 <a
@@ -96,24 +102,41 @@ const About: React.FC<IAboutProps> = ({
                 >
                   {info.user}
                 </a>
-              </>
+              </Fragment>
             );
           })}
         </li>
       )}
-      {openingTime.map(info => (
-        <li className="d-flex align-items-center list-unstyled col pb-4">
+
+      {Array.isArray(openingTime) && openingTime.length > 0 && (
+        <li className="d-flex list-unstyled pb-4">
           <div className="px-2">
             <IconStyle>
               <MdOutlineWatchLater />
             </IconStyle>
           </div>
-          <div className="px-2 m-0">{info.label}</div>
-          <div className="flex-column">
-            {info.horario.abre} às {info.horario.fecha}
+          <div>
+            {openingTime?.map(info => (
+              <Fragment key={info.label}>
+                <div className="m-0">{info.label}</div>
+                <div>
+                  {info.horario.abre} às {info.horario.fecha}
+                </div>
+              </Fragment>
+            ))}
           </div>
         </li>
-      ))}
+      )}
+      {site && (
+        <li className="d-flex align-items-center list-unstyled col pb-4">
+          <div className="px-2">
+            <IconStyle>
+              <AiOutlineGlobal />
+            </IconStyle>
+          </div>
+          <div className="px-2 m-0">{site}</div>
+        </li>
+      )}
     </ul>
   </div>
 );

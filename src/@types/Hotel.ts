@@ -12,6 +12,8 @@ export type HotelType = {
   nome: string;
   email?: string;
   site?: string;
+  capa?: string;
+  enderecos: AddressType[];
   quartos?: number;
   leitos?: number;
   cafe_manha?: boolean;

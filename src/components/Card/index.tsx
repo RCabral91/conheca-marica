@@ -41,7 +41,9 @@ export const Card: React.FC<ICardProps> = ({
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <h2 className="fs-sm mt-0 mb-2">{title}</h2>
+                  <h2 className="fs-sm mt-0 align-items-stretch mb-2">
+                    {title}
+                  </h2>
                 </a>
               </>
             )}

@@ -6,6 +6,9 @@ export const GlobalStyle = createGlobalStyle`
     --secondary: #6ebd00;
     --black90: rgba(0, 0, 0, 0.9); 
     --gray-dark: #343a40;
+    --white: rgb(255, 255, 255);
+    --light: rgba(245, 245, 245)
+
   }
   
   * {

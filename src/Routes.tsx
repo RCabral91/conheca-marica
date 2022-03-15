@@ -20,6 +20,12 @@ import PubsNRests from './pages/PubsNRests';
 import TouristHotspot from './pages/TouristHotspot';
 import TouristHotspots from './pages/TouristHotspots';
 import MapOfHotels from './pages/MapOfHotels';
+import CategoriesCommerces from './pages/CategoriesCommerces';
+import MapOfPubsNRests from './pages/MapOfPubsNRests';
+import MapOfEventsSpaces from './pages/MapOfEventsSpaces';
+import MapOfCommerces from './pages/MapOfCommerces';
+import MapOfEvents from './pages/MapOfEvents';
+import Commerce from './pages/Commerce';
 
 export const Routes: React.FC = () => {
   return (
@@ -52,10 +58,19 @@ export const Routes: React.FC = () => {
           path="/bares-e-restaurantes/:categorias/:id"
           element={<CategoriesPubsNRests />}
         />
+        <Route
+          path="/bares-e-restaurantes/mapa"
+          element={<MapOfPubsNRests />}
+        />
 
         {/* Commerces */}
         <Route path="/comercio-local" element={<Commerces />} />
-        <Route path="/comercio-local/:id" element={<Commerces />} />
+        <Route path="/comercio-local/:id" element={<Commerce />} />
+        <Route
+          path="/comercio-local/:categorias/:id"
+          element={<CategoriesCommerces />}
+        />
+        <Route path="/comercio-local/mapa" element={<MapOfCommerces />} />
 
         {/* Events Spaces */}
         <Route path="/espacos" element={<EventsSpaces />} />
@@ -64,11 +79,13 @@ export const Routes: React.FC = () => {
           path="/espacos/:categorias/:id"
           element={<CategoriesEventsSpaces />}
         />
+        <Route path="/espacos/mapa" element={<MapOfEventsSpaces />} />
 
         {/* Events */}
         <Route path="/eventos" element={<Events />} />
         <Route path="/eventos/:id" element={<Event />} />
         <Route path="/eventos/:categorias/:id" element={<CategoriesEvents />} />
+        <Route path="/eventos/mapa" element={<MapOfEvents />} />
 
         {/* About City */}
         <Route path="/sobre" element={<AboutCity />} />

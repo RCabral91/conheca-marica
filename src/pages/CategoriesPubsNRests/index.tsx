@@ -11,6 +11,7 @@ import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
 import PubNRestCard from '../../components/PubNRestCard';
 import { usePubsNRests } from '../../hooks/PubsNRestsContext';
+import { setTitle } from '../../utils/title';
 
 const PubsNRestsByCategory: React.FC = () => {
   const {
@@ -25,6 +26,9 @@ const PubsNRestsByCategory: React.FC = () => {
     getPubsNRestsByCategory(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    setTitle(`${category?.label ?? 'Loading...'} | Bares e Restaurantes`);
+  }, [category]);
 
   const handleSearch = (searchText: string): void => {
     getPubsNRests(searchText);
@@ -35,7 +39,7 @@ const PubsNRestsByCategory: React.FC = () => {
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={<LoadingCards show amount={4} />}
       >
         <Main>
           <Container>
@@ -51,13 +55,14 @@ const PubsNRestsByCategory: React.FC = () => {
               </div>
               <div className="d-flex col-md-6 g-3">
                 <div className="me-3">
-                  <Map />
+                  <Map url="bares-e-restaurantes/mapa" />
                 </div>
-
-                <SearchInput
-                  onSearch={handleSearch}
-                  placeholder="Buscar bares e restaurantes"
-                />
+                <div className="flex-grow-1">
+                  <SearchInput
+                    onSearch={handleSearch}
+                    placeholder="Buscar bares e restaurantes"
+                  />
+                </div>
               </div>
             </div>
             {isLoading ? (

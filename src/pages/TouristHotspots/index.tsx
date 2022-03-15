@@ -12,12 +12,15 @@ import { SearchInput } from '../../components/SearchInput';
 import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
 import LoadingPills from '../../components/LoadingPills';
+import { setTitle } from '../../utils/title';
 
 const TouristHotspots: React.FC = () => {
   const { spots, isLoading, categories, getSpots } = useSpots();
 
   useEffect(() => {
     getSpots();
+    setTitle('Pontos Turísticos');
+    window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -32,9 +35,8 @@ const TouristHotspots: React.FC = () => {
         waitFor={isLoading === false}
         meanwhile={
           <>
-            <LoadingPills show numberOfCards={3} />
-            <LoadingPills show numberOfCards={12} />
-            <LoadingCards show numberOfCards={4} />
+            <LoadingPills show amount={10} />
+            <LoadingCards show amount={4} />
           </>
         }
       >
@@ -50,19 +52,12 @@ const TouristHotspots: React.FC = () => {
                 <div className="me-3">
                   <Map url="/pontos-turisticos/mapa" />
                 </div>
-
-                {/* <div className="d-flex col-md-6 justify-content-end">
-              <Link to="/eventos/mapa">
-                <div className="btn btn-primary my-4 me-3" title="Ver no mapa">
-                  <FaMapMarkedAlt className="me-2 fs-4 text-white" />
-                  Mapa
+                <div className="flex-grow-1">
+                  <SearchInput
+                    onSearch={handleSearch}
+                    placeholder="Buscar pontos turísticos"
+                  />
                 </div>
-              </Link> */}
-
-                <SearchInput
-                  onSearch={handleSearch}
-                  placeholder="Buscar pontos turísticos"
-                />
               </div>
             </div>
             <Categories

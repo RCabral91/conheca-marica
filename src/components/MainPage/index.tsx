@@ -5,16 +5,28 @@ import { MdLocalFlorist, MdOutlineRestaurant } from 'react-icons/md';
 import { GiMicrophone } from 'react-icons/gi';
 import { RiCalendar2Fill } from 'react-icons/ri';
 import { SiHomeassistantcommunitystore } from 'react-icons/si';
+import { useEffect } from 'react';
 import { Card } from '../Card';
 import phone from '../../assets/phone.png';
 import androidImg from '../../assets/androidImg.png';
 import appleImg from '../../assets/appleImg.png';
 import { SiteApp } from './styles';
+import { setTitle } from '../../utils/title';
+import { useEvents } from '../../hooks/EventsContext';
 
 const routesUrl = process.env.REACT_APP_ROUTES_URL ?? '';
 const craftUrl = process.env.REACT_APP_CRAFT_URL ?? '';
 
 export const MainPage: React.FC = () => {
+  const { getEvents } = useEvents();
+
+  useEffect(() => {
+    getEvents();
+    setTitle('Conheça Maricá | Guia Turístico e Comercial de Maricá');
+    window.scrollTo(0, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <div className="container mb-4">

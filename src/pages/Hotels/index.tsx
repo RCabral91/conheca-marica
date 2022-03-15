@@ -12,12 +12,15 @@ import { Map } from '../../components/Map';
 import PageTitle from '../../components/PageTitle';
 import { SearchInput } from '../../components/SearchInput';
 import { useHotels } from '../../hooks/HotelsContext';
+import { setTitle } from '../../utils/title';
 
 const Hotels: React.FC = () => {
   const { hotels, isLoading, categories, getHotels } = useHotels();
 
   useEffect(() => {
     getHotels();
+    setTitle('Hotéis e Pousadas');
+    window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -32,9 +35,8 @@ const Hotels: React.FC = () => {
         waitFor={isLoading === false}
         meanwhile={
           <>
-            <LoadingPills show numberOfCards={3} />
-            <LoadingPills show numberOfCards={12} />
-            <LoadingCards show numberOfCards={4} />
+            <LoadingPills show amount={10} />
+            <LoadingCards show amount={4} />
           </>
         }
       >
@@ -50,7 +52,7 @@ const Hotels: React.FC = () => {
                 <div className="me-3">
                   <Map url="/hoteis-e-pousadas/mapa" />
                 </div>
-                <div className="input input-display">
+                <div className="flex-grow-1">
                   <SearchInput
                     onSearch={handleSearch}
                     placeholder="Buscar hotéis e pousadas"

@@ -12,12 +12,15 @@ import { Map } from '../../components/Map';
 import PageTitle from '../../components/PageTitle';
 import { SearchInput } from '../../components/SearchInput';
 import { useCommerces } from '../../hooks/CommerceContext';
+import { setTitle } from '../../utils/title';
 
 const Commerces: React.FC = () => {
   const { commerces, isLoading, categories, getCommerces } = useCommerces();
 
   useEffect(() => {
     getCommerces();
+    setTitle('Comércio Local');
+    window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -32,9 +35,8 @@ const Commerces: React.FC = () => {
         waitFor={isLoading === false}
         meanwhile={
           <>
-            <LoadingPills show numberOfCards={3} />
-            <LoadingPills show numberOfCards={12} />
-            <LoadingCards show numberOfCards={4} />
+            <LoadingPills show amount={10} />
+            <LoadingCards show amount={4} />
           </>
         }
       >
@@ -48,9 +50,9 @@ const Commerces: React.FC = () => {
               </div>
               <div className="d-flex col-md-6 g-3">
                 <div className="me-3">
-                  <Map />
+                  <Map url="comercio-local/mapa" />
                 </div>
-                <div className="input input-display">
+                <div className="flex-grow-1">
                   <SearchInput
                     onSearch={handleSearch}
                     placeholder="Buscar comércio local"

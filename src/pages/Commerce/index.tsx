@@ -14,6 +14,7 @@ import LoadingGate from '../../components/LoadingGate';
 import Main from '../../components/Main';
 import PageTitle from '../../components/PageTitle';
 import { useCommerces } from '../../hooks/CommerceContext';
+import { setTitle } from '../../utils/title';
 
 const Commerce: React.FC = () => {
   const { commerce, isLoading, setCommerce, getCommerce } = useCommerces();
@@ -23,13 +24,16 @@ const Commerce: React.FC = () => {
     getCommerce(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    setTitle(`${commerce?.nome ?? 'Loading...'} | Comércio Local`);
+  }, [commerce]);
 
   return (
     <>
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={<LoadingCards show amount={4} />}
       >
         <CommerceSlider images={commerce?.images} />
         <Main>
@@ -41,14 +45,14 @@ const Commerce: React.FC = () => {
                     <PageTitle
                       title={commerce?.nome ?? 'Carregando...'}
                       subtitle="Comércio Local"
-                      url="/comercios"
+                      url="/comercio-local"
                     />
                   </div>
                   {commerce && (
                     <>
                       <Categories
                         categories={commerce.categorias}
-                        url="comercios"
+                        url="comercio-local"
                         color="secondary"
                       />
                       <div className="mb-3 fs-5">

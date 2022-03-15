@@ -12,6 +12,7 @@ import { SearchInput } from '../../components/SearchInput';
 import { Categories } from '../../components/Categories';
 import { Footer } from '../../components/Footer';
 import LoadingPills from '../../components/LoadingPills';
+import { setTitle } from '../../utils/title';
 
 const EventsSpaces: React.FC = () => {
   const { eventsSpaces, isLoading, categories, getEventsSpaces } =
@@ -19,6 +20,8 @@ const EventsSpaces: React.FC = () => {
 
   useEffect(() => {
     getEventsSpaces();
+    setTitle('Espaços para Eventos');
+    window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -33,9 +36,8 @@ const EventsSpaces: React.FC = () => {
         waitFor={isLoading === false}
         meanwhile={
           <>
-            <LoadingPills show numberOfCards={3} />
-            <LoadingPills show numberOfCards={12} />
-            <LoadingCards show numberOfCards={4} />
+            <LoadingPills show amount={10} />
+            <LoadingCards show amount={4} />
           </>
         }
       >
@@ -49,13 +51,14 @@ const EventsSpaces: React.FC = () => {
               </div>
               <div className="d-flex col-md-6 g-3">
                 <div className="me-3">
-                  <Map />
+                  <Map url="/espacos/mapa" />
                 </div>
-
-                <SearchInput
-                  onSearch={handleSearch}
-                  placeholder="Buscar espaços para eventos"
-                />
+                <div className="flex-grow-1">
+                  <SearchInput
+                    onSearch={handleSearch}
+                    placeholder="Buscar espaços para eventos"
+                  />
+                </div>
               </div>
             </div>
             <Categories

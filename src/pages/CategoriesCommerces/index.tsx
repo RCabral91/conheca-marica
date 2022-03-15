@@ -11,6 +11,7 @@ import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
 import { useCommerces } from '../../hooks/CommerceContext';
 import CommerceCard from '../../components/CommerceCard';
+import { setTitle } from '../../utils/title';
 
 const CommercesByCategory: React.FC = () => {
   const {
@@ -25,6 +26,9 @@ const CommercesByCategory: React.FC = () => {
     getCommercesByCategory(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    setTitle(`${category?.label ?? 'Loading...'} | Comércio Local`);
+  }, [category]);
 
   const handleSearch = (searchText: string): void => {
     getCommerces(searchText);
@@ -35,7 +39,7 @@ const CommercesByCategory: React.FC = () => {
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={<LoadingCards show amount={4} />}
       >
         <Main>
           <Container>
@@ -44,20 +48,21 @@ const CommercesByCategory: React.FC = () => {
                 <div className="d-flex align-items-center mb-4 mb-md-0">
                   <PageTitle
                     title={category?.label ?? 'Carregando...'}
-                    subtitle="Comércios Locais"
-                    url="/comercios"
+                    subtitle="Comércio Local"
+                    url="/comercio-local"
                   />
                 </div>
               </div>
               <div className="d-flex col-md-6 g-3">
                 <div className="me-3">
-                  <Map />
+                  <Map url="comercio-local/mapa" />
                 </div>
-
-                <SearchInput
-                  onSearch={handleSearch}
-                  placeholder="Buscar comércios locais"
-                />
+                <div className="flex-grow-1">
+                  <SearchInput
+                    onSearch={handleSearch}
+                    placeholder="Buscar comércios locais"
+                  />
+                </div>
               </div>
             </div>
             {isLoading ? (

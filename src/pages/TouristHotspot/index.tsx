@@ -16,6 +16,7 @@ import PageTitle from '../../components/PageTitle';
 import SpotSlider from '../../components/SpotSlider';
 import Tips from '../../components/Tips';
 import { useSpots } from '../../hooks/SpotsContext';
+import { setTitle } from '../../utils/title';
 
 const TouristHotspot: React.FC = () => {
   const { spot, isLoading, setSpot, getSpot } = useSpots();
@@ -26,12 +27,16 @@ const TouristHotspot: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    setTitle(`${spot?.nome ?? 'Loading...'} | Pontos Turísticos`);
+  }, [spot]);
+
   return (
     <>
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={<LoadingCards show amount={4} />}
       >
         <SpotSlider images={spot?.images} />
         <Main>

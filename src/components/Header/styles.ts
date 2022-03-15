@@ -61,6 +61,16 @@ export const Content = styled.div`
     width: 490px;
   }
 
+  @media (max-width: 991px) {
+    .sm-logo {
+      max-width: 300px;
+    }
+  }
+
+  .mobileImg {
+    width: 120px;
+  }
+
   button {
     font-size: 1rem;
     color: var(--white);

@@ -10,7 +10,7 @@ export const Carousel: React.FC = () => {
   }, []);
 
   return (
-    <section className="mb-4 d-none d-md-block">
+    <section className="mb-4">
       <div
         id="carousel"
         className="carousel slide carousel-fade"
@@ -27,7 +27,12 @@ export const Carousel: React.FC = () => {
               >
                 <img
                   src={banner.image_l}
-                  className="d-block w-100"
+                  className="d-none d-md-block w-100"
+                  alt="carousel"
+                />
+                <img
+                  src={banner.image_s}
+                  className="d-block d-md-none w-100"
                   alt="carousel"
                 />
               </div>

@@ -13,12 +13,14 @@ import { Api } from '../services/Api';
 interface IHotelsContextProps {
   hotel: HotelType | null;
   hotels: HotelType[];
+  category?: CategoryType | null;
   categories: CategoryType[];
   isLoading: boolean;
   errorMessage: string | null;
   setHotel: (hotel: HotelType | null) => void;
   getHotel: (id: number) => Promise<void>;
   getHotels: (text?: string) => Promise<void>;
+  getHotelsByCategory: (id: number) => Promise<void>;
 }
 
 // Aqui é definido o Context (não precisa entender, é sempre exatamente assim)
@@ -45,10 +47,30 @@ export const useHotels = (): IHotelsContextProps => {
 export const HotelsProvider: React.FC = ({ children }) => {
   const [hotel, setHotel] = useState<HotelType | null>(null);
   const [hotels, setHotels] = useState<HotelType[]>([]);
+  const [category, setCategory] = useState<CategoryType | null>(null);
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
+
+  const getHotelsByCategory = useCallback(
+    async (id): Promise<void> => {
+      setLoading(true);
+      Api.get(`/hoteis-e-pousadas/categorias/${id}`)
+        .then(response => {
+          setHotels(response.data.collection);
+          const categoryToFind = categories.find(c => c.id === id);
+          setCategory(categoryToFind ?? null);
+          setAlreadyGot(false);
+        })
+        .catch(() => {
+          setHotels([]);
+          setCategory(null);
+        })
+        .finally(() => setLoading(false));
+    },
+    [categories]
+  );
 
   const getHotel = useCallback(async (id): Promise<void> => {
     setLoading(true);
@@ -89,24 +111,28 @@ export const HotelsProvider: React.FC = ({ children }) => {
     () => ({
       hotel,
       hotels,
+      category,
       categories,
       isLoading,
       errorMessage,
-      setCategories,
+      setCategory,
       setHotel,
       getHotel,
       getHotels,
+      getHotelsByCategory,
     }),
     [
       hotel,
       hotels,
+      category,
       categories,
       isLoading,
       errorMessage,
-      setCategories,
+      setCategory,
       setHotel,
       getHotel,
       getHotels,
+      getHotelsByCategory,
     ]
   );
 

@@ -13,12 +13,14 @@ import { Api } from '../services/Api';
 interface ISpotsContextProps {
   spot: SpotType | null;
   spots: SpotType[];
+  category?: CategoryType | null;
   categories: CategoryType[];
   isLoading: boolean;
   errorMessage: string | null;
   setSpot: (spot: SpotType | null) => void;
   getSpot: (id: number) => Promise<void>;
   getSpots: (text?: string) => Promise<void>;
+  getSpotsByCategory: (id: number) => Promise<void>;
 }
 
 // Aqui é definido o Context (não precisa entender, é sempre exatamente assim)
@@ -44,10 +46,30 @@ export const useSpots = (): ISpotsContextProps => {
 export const SpotsProvider: React.FC = ({ children }) => {
   const [spot, setSpot] = useState<SpotType | null>(null);
   const [spots, setSpots] = useState<SpotType[]>([]);
+  const [category, setCategory] = useState<CategoryType | null>(null);
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
+
+  const getSpotsByCategory = useCallback(
+    async (id): Promise<void> => {
+      setLoading(true);
+      Api.get(`/pontos/categorias/${id}`)
+        .then(response => {
+          setSpots(response.data.collection);
+          const categoryToFind = categories.find(c => c.id === id);
+          setCategory(categoryToFind ?? null);
+          setAlreadyGot(false);
+        })
+        .catch(() => {
+          setSpots([]);
+          setCategory(null);
+        })
+        .finally(() => setLoading(false));
+    },
+    [categories]
+  );
 
   const getSpot = useCallback(async (id): Promise<void> => {
     setLoading(true);
@@ -88,24 +110,28 @@ export const SpotsProvider: React.FC = ({ children }) => {
     () => ({
       spot,
       spots,
+      category,
       categories,
       isLoading,
       errorMessage,
-      setCategories,
+      setCategory,
       setSpot,
       getSpot,
       getSpots,
+      getSpotsByCategory,
     }),
     [
       spot,
       spots,
+      category,
       categories,
       isLoading,
       errorMessage,
-      setCategories,
+      setCategory,
       setSpot,
       getSpot,
       getSpots,
+      getSpotsByCategory,
     ]
   );
 

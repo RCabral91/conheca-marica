@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import Breadcrumb from '../../components/Breadcrumb';
 import { Categories } from '../../components/Categories';
 import Container from '../../components/Container';
 import { Footer } from '../../components/Footer';
@@ -7,18 +6,12 @@ import { Header } from '../../components/Header';
 import HotelCard from '../../components/HotelCard';
 import LoadingCards from '../../components/LoadingCards';
 import LoadingGate from '../../components/LoadingGate';
+import LoadingPills from '../../components/LoadingPills';
 import Main from '../../components/Main';
 import { Map } from '../../components/Map';
 import PageTitle from '../../components/PageTitle';
 import { SearchInput } from '../../components/SearchInput';
 import { useHotels } from '../../hooks/HotelsContext';
-
-const breadcrumbData = [
-  {
-    title: 'Hotéis e Pousadas',
-    backTo: '/',
-  },
-];
 
 const Hotels: React.FC = () => {
   const { hotels, isLoading, categories, getHotels } = useHotels();
@@ -37,20 +30,25 @@ const Hotels: React.FC = () => {
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={
+          <>
+            <LoadingPills show numberOfCards={3} />
+            <LoadingPills show numberOfCards={12} />
+            <LoadingCards show numberOfCards={4} />
+          </>
+        }
       >
         <Main>
           <Container>
             <div className="row pt-3 pt-md-4 pb-4">
               <div className="col-md-6">
                 <div className="d-flex align-items-center mb-4 mb-md-0">
-                  <Breadcrumb data={breadcrumbData} />
                   <PageTitle title="Hotéis e Pousadas" />
                 </div>
               </div>
               <div className="d-flex col-md-6">
                 <div className="me-3">
-                  <Map />
+                  <Map url="/hoteis-e-pousadas/mapa" />
                 </div>
                 <div className="input input-display">
                   <SearchInput
@@ -68,7 +66,7 @@ const Hotels: React.FC = () => {
             {isLoading ? (
               <p>Carregando</p>
             ) : (
-              <div className="row row-cols-3 ps-2">
+              <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 ps-2">
                 {hotels.map(hotel => {
                   return (
                     <div

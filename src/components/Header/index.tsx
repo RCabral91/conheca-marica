@@ -18,6 +18,7 @@ import { GiMicrophone } from 'react-icons/gi';
 import { RiCalendar2Fill } from 'react-icons/ri';
 import { SiHomeassistantcommunitystore } from 'react-icons/si';
 import conhecamarica from '../../assets/conhecamarica.png';
+import maricalogo from '../../assets/maricalogo.png';
 import { Container, Content, Menu } from './styles';
 
 const routesUrl = process.env.REACT_APP_ROUTES_URL ?? '';
@@ -42,7 +43,7 @@ export const Header: React.FC = () => {
             </Link>
           </li>
           <li>
-            <Link to="/sobre-a-cidade">
+            <Link to="/sobre">
               <AiOutlineInfoCircle /> Sobre a Cidade
             </Link>
           </li>
@@ -77,7 +78,7 @@ export const Header: React.FC = () => {
             </Link>
           </li>
           <li>
-            <Link to="/espacos-para-eventos">
+            <Link to="/espacos">
               <GiMicrophone /> Espaços para Eventos
             </Link>
           </li>
@@ -113,7 +114,18 @@ export const Header: React.FC = () => {
                     <FaBars className="fs-4 m-3" />
                     <span className="d-none d-md-inline">Menu</span>
                   </button>
-                  <img src={conhecamarica} alt="Maricá" />
+                  <Link to="/">
+                    <img
+                      src={conhecamarica}
+                      alt="Maricá"
+                      className="sm-logo d-none d-md-block"
+                    />
+                    <img
+                      src={maricalogo}
+                      alt="Maricá"
+                      className="d-block d-md-none mobileImg"
+                    />
+                  </Link>
                   <div className="d-none d-md-flex">
                     <a
                       href="https://www.facebook.com/prefeiturademarica?_rdc=1&_rdr"
@@ -144,6 +156,7 @@ export const Header: React.FC = () => {
                       <FaYoutube className="fs-5 text-white ms-2" />
                     </a>
                   </div>
+                  <div className="d-block d-md-none" />
                 </div>
               </div>
             </div>

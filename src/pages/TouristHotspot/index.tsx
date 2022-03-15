@@ -13,9 +13,8 @@ import LoadingCards from '../../components/LoadingCards';
 import LoadingGate from '../../components/LoadingGate';
 import Main from '../../components/Main';
 import PageTitle from '../../components/PageTitle';
-import SpotSlider from '../../components/SpotSilder';
+import SpotSlider from '../../components/SpotSlider';
 import Tips from '../../components/Tips';
-
 import { useSpots } from '../../hooks/SpotsContext';
 
 const TouristHotspot: React.FC = () => {
@@ -51,7 +50,7 @@ const TouristHotspot: React.FC = () => {
                     <>
                       <Categories
                         categories={spot.categorias}
-                        url="/pontos"
+                        url="pontos-turisticos"
                         color="secondary"
                       />
                       <div className="mb-3 fs-5">
@@ -75,6 +74,7 @@ const TouristHotspot: React.FC = () => {
                         <EntryValue
                           title="Valor de Entrada"
                           priceToEntry={spot.preco_t}
+                          isFree={!!spot.gratuito}
                         />
                       )}
 

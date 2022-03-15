@@ -16,7 +16,7 @@ export const Footer: React.FC = () => {
                 rel="noreferrer"
               >
                 <FaFacebook className="me-3" />
-                Facebook
+                <span className="d-none d-md-inline">Facebook</span>
               </a>
               <a
                 href="https://www.instagram.com/prefeiturademarica/"
@@ -24,7 +24,7 @@ export const Footer: React.FC = () => {
                 rel="noreferrer"
               >
                 <FaInstagram className="mx-3" />
-                Instagram
+                <span className="d-none d-md-inline">Instagram</span>
               </a>
               <a
                 href="https://twitter.com/MaricaRJ"
@@ -32,7 +32,7 @@ export const Footer: React.FC = () => {
                 rel="noreferrer"
               >
                 <FaTwitter className="mx-3" />
-                Twitter
+                <span className="d-none d-md-inline">Twitter</span>
               </a>
               <a
                 href="https://www.youtube.com/user/prefeiturademarica1"
@@ -40,10 +40,10 @@ export const Footer: React.FC = () => {
                 rel="noreferrer"
               >
                 <FaYoutube className="mx-3" />
-                Youtube
+                <span className="d-none d-md-inline">Youtube</span>
               </a>
             </div>
-            <div>
+            <div className="text-center text-xl-start">
               <a
                 href="https://app.marica2030.com.br/login"
                 target="_blank"

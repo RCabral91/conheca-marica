@@ -13,12 +13,14 @@ import { Api } from '../services/Api';
 interface IPubsNRestsContextProps {
   pubNRest: PubNRestType | null;
   pubsNRests: PubNRestType[];
+  category?: CategoryType | null;
   categories: CategoryType[];
   isLoading: boolean;
   errorMessage: string | null;
   setPubNRest: (pubNRest: PubNRestType | null) => void;
   getPubNRest: (id: number) => Promise<void>;
   getPubsNRests: (text?: string) => Promise<void>;
+  getPubsNRestsByCategory: (id: number) => Promise<void>;
 }
 
 // Aqui é definido o Context (não precisa entender, é sempre exatamente assim)
@@ -45,79 +47,96 @@ export const usePubsNRests = (): IPubsNRestsContextProps => {
 export const PubsNRestsProvider: React.FC = ({ children }) => {
   const [pubNRest, setPubNRest] = useState<PubNRestType | null>(null);
   const [pubsNRests, setPubsNRests] = useState<PubNRestType[]>([]);
+  const [category, setCategory] = useState<CategoryType | null>(null);
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
 
-  const getPubNRest = useCallback(async (searchText): Promise<void> => {
-    let url = `/restaurantes`;
+  const getPubsNRestsByCategory = useCallback(
+    async (id): Promise<void> => {
+      setLoading(true);
+      Api.get(`/restaurantes/categorias/${id}`)
+        .then(response => {
+          setPubsNRests(response.data.collection);
+          const categoryToFind = categories.find(c => c.id === id);
+          setCategory(categoryToFind ?? null);
+          setAlreadyGot(false);
+        })
+        .catch(() => {
+          setPubsNRests([]);
+          setCategory(null);
+        })
+        .finally(() => setLoading(false));
+    },
+    [categories]
+  );
 
-    if (searchText.length > 0) {
-      url += `/busca?busca=${searchText}`;
-    }
-    Api.get(url)
-      .then(response => {
-        setPubsNRests(response.data.collection);
-
-        if (response.data.categorias) {
-          setCategories(response.data.categorias);
-        }
-      })
-      .catch(() => {
-        setPubNRest(pubNRest);
-        setCategories([]);
-      })
-      .finally();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  const getPubNRest = useCallback(async (id): Promise<void> => {
+    setLoading(true);
+    Api.get(`/restaurantes/${id}`)
+      .then(response => setPubNRest(response.data.item))
+      .catch(() => setPubNRest(null))
+      .finally(() => setLoading(false));
   }, []);
 
-  const getPubsNRests = useCallback(async (): Promise<void> => {
-    if (!alreadyGot) {
-      setLoading(true);
-      setErrorMessage(null);
-      try {
-        const response = await Api.get(`/restaurantes`);
+  const getPubsNRests = useCallback(
+    async (searchText = ''): Promise<void> => {
+      if (!alreadyGot || searchText.length > 0) {
+        setLoading(true);
+        setErrorMessage(null);
 
-        if (Array.isArray(response?.data?.collection)) {
-          setPubsNRests(response?.data?.collection);
-          setCategories(response?.data?.categorias);
+        const url = searchText
+          ? `/restaurantes/busca?busca=${searchText}`
+          : '/restaurantes';
+        try {
+          const response = await Api.get(url, {
+            params: {
+              fields: 'is_delivery',
+            },
+          });
+          if (!searchText) {
+            setCategories(response.data.categorias);
+          }
+          setPubsNRests(response.data.collection);
           setAlreadyGot(true);
-        } else {
-          setPubsNRests([]);
-          setCategories([]);
-          setErrorMessage('Error to get Pubs and Restaurants.');
+        } catch (e) {
+          if (e instanceof Error) setErrorMessage(e.message);
+        } finally {
+          setLoading(false);
         }
-      } catch (e) {
-        if (e instanceof Error) setErrorMessage(e.message);
-      } finally {
-        setLoading(false);
       }
-    }
-  }, [alreadyGot]);
+    },
+    [alreadyGot]
+  );
 
   // Aqui são definidas quais informações estarão disponíveis "para fora" do Provider
   const providerValue = useMemo(
     () => ({
       pubNRest,
       pubsNRests,
+      category,
       categories,
       isLoading,
       errorMessage,
-      setCategories,
+      setCategory,
       setPubNRest,
       getPubNRest,
       getPubsNRests,
+      getPubsNRestsByCategory,
     }),
     [
       pubNRest,
       pubsNRests,
+      category,
       categories,
       isLoading,
       errorMessage,
+      setCategory,
       setPubNRest,
       getPubNRest,
       getPubsNRests,
+      getPubsNRestsByCategory,
     ]
   );
 

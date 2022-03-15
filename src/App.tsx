@@ -1,6 +1,8 @@
+import { AboutCityProvider } from './hooks/AboutCity';
 import { BannersProvider } from './hooks/BannerContext';
 import { CommercesProvider } from './hooks/CommerceContext';
-import { EventsPlacesProvider } from './hooks/EventsPlaces';
+import { EventsProvider } from './hooks/EventsContext';
+import { EventsSpacesProvider } from './hooks/EventsSpaces';
 import { HotelsProvider } from './hooks/HotelsContext';
 import { PubsNRestsProvider } from './hooks/PubsNRestsContext';
 import { SpotsProvider } from './hooks/SpotsContext';
@@ -15,9 +17,13 @@ const App: React.FC = () => {
           <SpotsProvider>
             <PubsNRestsProvider>
               <CommercesProvider>
-                <EventsPlacesProvider>
-                  <Routes />
-                </EventsPlacesProvider>
+                <AboutCityProvider>
+                  <EventsSpacesProvider>
+                    <EventsProvider>
+                      <Routes />
+                    </EventsProvider>
+                  </EventsSpacesProvider>
+                </AboutCityProvider>
               </CommercesProvider>
             </PubsNRestsProvider>
           </SpotsProvider>

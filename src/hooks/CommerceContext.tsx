@@ -13,12 +13,14 @@ import { Api } from '../services/Api';
 interface ICommercesContextProps {
   commerce: CommerceType | null;
   commerces: CommerceType[];
+  category?: CategoryType | null;
   categories: CategoryType[];
   isLoading: boolean;
   errorMessage: string | null;
   setCommerce: (commerce: CommerceType | null) => void;
   getCommerce: (id: number) => Promise<void>;
   getCommerces: (text?: string) => Promise<void>;
+  getCommercesByCategory: (id: number) => Promise<void>;
 }
 
 // Aqui é definido o Context (não precisa entender, é sempre exatamente assim)
@@ -44,78 +46,90 @@ export const useCommerces = (): ICommercesContextProps => {
 export const CommercesProvider: React.FC = ({ children }) => {
   const [commerce, setCommerce] = useState<CommerceType | null>(null);
   const [commerces, setCommerces] = useState<CommerceType[]>([]);
+  const [category, setCategory] = useState<CategoryType | null>(null);
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [alreadyGot, setAlreadyGot] = useState(false);
 
-  const getCommerce = useCallback(async (searchText): Promise<void> => {
-    let url = `/comercios`;
+  const getCommercesByCategory = useCallback(
+    async (id): Promise<void> => {
+      setLoading(true);
+      Api.get(`/comercios/categorias/${id}`)
+        .then(response => {
+          setCommerces(response.data.collection);
+          const categoryToFind = categories.find(c => c.id === id);
+          setCategory(categoryToFind ?? null);
+          setAlreadyGot(false);
+        })
+        .catch(() => {
+          setCommerces([]);
+          setCategory(null);
+        })
+        .finally(() => setLoading(false));
+    },
+    [categories]
+  );
 
-    if (searchText.length > 0) {
-      url += `/busca?busca=${searchText}`;
-    }
-    Api.get(url)
-      .then(response => {
-        setCommerces(response.data.collection);
-
-        if (response.data.categorias) {
-          setCategories(response.data.categorias);
-        }
-      })
-      .catch(() => {
-        setCommerce(commerce);
-        setCategories([]);
-      })
-      .finally();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  const getCommerce = useCallback(async (id): Promise<void> => {
+    setLoading(true);
+    Api.get(`/comercios/${id}`)
+      .then(response => setCommerce(response.data.item))
+      .catch(() => setCommerce(null))
+      .finally(() => setLoading(false));
   }, []);
 
-  const getCommerces = useCallback(async (): Promise<void> => {
-    if (!alreadyGot) {
-      setLoading(true);
-      setErrorMessage(null);
-      try {
-        const response = await Api.get(`/comercios`);
+  const getCommerces = useCallback(
+    async (searchText = ''): Promise<void> => {
+      if (!alreadyGot || searchText.length > 0) {
+        setLoading(true);
+        setErrorMessage(null);
 
-        if (Array.isArray(response?.data?.collection)) {
-          setCommerces(response?.data?.collection);
-          setCategories(response?.data?.categorias);
+        const url = searchText
+          ? `/comercios/busca?busca=${searchText}`
+          : '/comercios';
+        try {
+          const response = await Api.get(url);
+          if (!searchText) {
+            setCategories(response.data.categorias);
+          }
+          setCommerces(response.data.collection);
           setAlreadyGot(true);
-        } else {
-          setCommerces([]);
-          setCategories([]);
-          setErrorMessage('Error to get commerces.');
+        } catch (e) {
+          if (e instanceof Error) setErrorMessage(e.message);
+        } finally {
+          setLoading(false);
         }
-      } catch (e) {
-        if (e instanceof Error) setErrorMessage(e.message);
-      } finally {
-        setLoading(false);
       }
-    }
-  }, [alreadyGot]);
+    },
+    [alreadyGot]
+  );
 
   // Aqui são definidas quais informações estarão disponíveis "para fora" do Provider
   const providerValue = useMemo(
     () => ({
       commerce,
       commerces,
+      category,
       categories,
       isLoading,
       errorMessage,
-      setCategories,
+      setCategory,
       setCommerce,
       getCommerce,
+      getCommercesByCategory,
       getCommerces,
     }),
     [
       commerce,
       commerces,
+      category,
       categories,
       isLoading,
       errorMessage,
-      setCategories,
+      setCategory,
       setCommerce,
+      getCommercesByCategory,
       getCommerce,
       getCommerces,
     ]

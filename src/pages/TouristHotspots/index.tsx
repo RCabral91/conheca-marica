@@ -11,6 +11,7 @@ import PageTitle from '../../components/PageTitle';
 import { SearchInput } from '../../components/SearchInput';
 import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
+import LoadingPills from '../../components/LoadingPills';
 
 const TouristHotspots: React.FC = () => {
   const { spots, isLoading, categories, getSpots } = useSpots();
@@ -29,7 +30,13 @@ const TouristHotspots: React.FC = () => {
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={
+          <>
+            <LoadingPills show numberOfCards={3} />
+            <LoadingPills show numberOfCards={12} />
+            <LoadingCards show numberOfCards={4} />
+          </>
+        }
       >
         <Main>
           <Container>
@@ -41,8 +48,16 @@ const TouristHotspots: React.FC = () => {
               </div>
               <div className="d-flex col-md-6 g-3">
                 <div className="me-3">
-                  <Map />
+                  <Map url="/pontos-turisticos/mapa" />
                 </div>
+
+                {/* <div className="d-flex col-md-6 justify-content-end">
+              <Link to="/eventos/mapa">
+                <div className="btn btn-primary my-4 me-3" title="Ver no mapa">
+                  <FaMapMarkedAlt className="me-2 fs-4 text-white" />
+                  Mapa
+                </div>
+              </Link> */}
 
                 <SearchInput
                   onSearch={handleSearch}
@@ -58,7 +73,7 @@ const TouristHotspots: React.FC = () => {
             {isLoading ? (
               <p>Carregando</p>
             ) : (
-              <div className="row row-cols-3 ps-2">
+              <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 ps-2">
                 {spots.map(spot => {
                   return (
                     <div

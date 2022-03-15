@@ -9,10 +9,10 @@ import { NetworkType } from './Network';
 
 export type SpotType = {
   id: number;
-  nome: string;
+  nome?: string;
   capa?: string;
   enderecos: AddressType[];
-  categorias: CategoryType[];
+  categorias?: CategoryType[];
   addresses: AddressType[];
   images?: ImageType[];
   email?: string;
@@ -20,13 +20,13 @@ export type SpotType = {
   gratuito?: number;
   descricao_t?: string;
   preco_t?: string;
-  dicas_t: string;
-  phones: PhoneType[];
-  horario_funcionamento: OpeningTimeType[];
-  viajantes: string;
-  estruturas: GeneralInfoType[];
-  restricoes: GeneralInfoType[];
+  dicas_t?: string;
+  phones?: PhoneType[];
+  horario_funcionamento?: OpeningTimeType[];
+  viajantes?: GeneralInfoType[];
+  estruturas?: GeneralInfoType[];
+  restricoes?: GeneralInfoType[];
   formas_pagamento?: GeneralInfoType[];
-  redes: NetworkType[];
+  redes?: NetworkType[];
   statusCode?: number;
 };

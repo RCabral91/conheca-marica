@@ -5,5 +5,5 @@ export type ImageType = {
     pt_BR: string;
   };
   ordem?: number;
-  src: string;
+  src?: string;
 };

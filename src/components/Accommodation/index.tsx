@@ -17,7 +17,7 @@ interface IAccommodationProps {
   jantar_hospedes?: boolean;
 }
 
-const About: React.FC<IAccommodationProps> = ({
+const Accommodation: React.FC<IAccommodationProps> = ({
   title,
   quartos,
   cafe_manha,
@@ -30,83 +30,78 @@ const About: React.FC<IAccommodationProps> = ({
 }) => (
   <div className="mt-5">
     <h2 className=" fs-4 border-2 border-bottom">{title}</h2>
-    <ul className="fs-5 align-items-center p-0">
-      {quartos && (
-        <li className="d-flex align-items-center list-unstyled col pb-4">
-          <div className="px-2">
-            <IconStyle>
-              <IoMdKey />
-            </IconStyle>
+    <div className="fs-5 align-items-center p-0">
+      <div className="row">
+        <div className="col-md-6 col-lg-4">
+          {quartos && (
+            <div className="d-flex align-items-center list-unstyled pb-4">
+              <div className="px-2">
+                <IconStyle>
+                  <IoMdKey />
+                </IconStyle>
+              </div>
+              <div className="px-2 m-0">{quartos} quartos</div>
+            </div>
+          )}
+        </div>
+        <div className="col-md-6 col-lg-4">
+          {leitos && (
+            <div className="d-flex align-items-center list-unstyled pb-4">
+              <div className="px-2">
+                <IconStyle>
+                  <FaBed />
+                </IconStyle>
+              </div>
+              <div className="px-2 m-0">{leitos} leitos</div>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="row">
+        {cafe_manha && (
+          <div className="d-flex align-items-center list-unstyled col-md-6 col-lg-4 pb-4">
+            <div className="px-2">
+              <IconStyle>
+                <TiCoffee />
+              </IconStyle>
+            </div>
+            <div>
+              <p className="fs-6 mb-0">Café da manhã</p>
+              {cafe_hospedes ? 'Aceita não-hóspedes' : 'Apenas hóspedes'}
+            </div>
           </div>
-          <div className="px-2 m-0">{quartos} quartos</div>
-        </li>
-      )}
-      {cafe_manha && (
-        <li className="d-flex align-items-center list-unstyled col pb-4">
-          <div className="px-2">
-            <IconStyle>
-              <TiCoffee />
-            </IconStyle>
-          </div>
-          <div>
-            <p>Aceita café da manhã</p>
-            {cafe_hospedes ? 'Aceita não-hóspedes' : 'Apenas para hóspedes'}
-          </div>
-        </li>
-      )}
+        )}
 
-      {leitos && (
-        <li className="d-flex align-items-center list-unstyled col pb-4">
-          <div className="px-2">
-            <IconStyle>
-              <FaBed />
-            </IconStyle>
+        {almoco && (
+          <div className="d-flex align-items-center list-unstyled col-md-6 col-lg-4 pb-4">
+            <div className="px-2">
+              <IconStyle>
+                <GiKnifeFork />
+              </IconStyle>
+            </div>
+            <div>
+              <p className="fs-6 mb-0">Almoço</p>
+              {almoco_hospedes ? 'Aceita não-hóspedes' : 'Apenas hóspedes'}
+            </div>
           </div>
-          <div className="px-2 m-0">{leitos} leitos</div>
-        </li>
-      )}
-      {almoco && (
-        <li className="d-flex align-items-center list-unstyled col pb-4">
-          <div className="px-2">
-            <IconStyle>
-              <GiKnifeFork />
-            </IconStyle>
+        )}
+
+        {jantar && (
+          <div className="d-flex align-items-center list-unstyled col-md-6 col-lg-4 pb-4">
+            <div className="px-2">
+              <IconStyle>
+                <FaConciergeBell />
+              </IconStyle>
+            </div>
+            <div>
+              <p className="fs-6 mb-0">Jantar</p>
+              {jantar_hospedes ? 'Aceita não-hóspedes' : 'Apenas hóspedes'}
+            </div>
           </div>
-          <div className="px-2 m-0">{almoco}</div>
-        </li>
-      )}
-      {almoco_hospedes && (
-        <li className="d-flex align-items-center list-unstyled col pb-4">
-          <div className="px-2">
-            <IconStyle>
-              <GiKnifeFork />
-            </IconStyle>
-          </div>
-          <div className="px-2 m-0">{almoco_hospedes}</div>
-        </li>
-      )}
-      {jantar && (
-        <li className="d-flex align-items-center list-unstyled col pb-4">
-          <div className="px-2">
-            <IconStyle>
-              <FaConciergeBell />
-            </IconStyle>
-          </div>
-          <div className="px-2 m-0">{jantar}</div>
-        </li>
-      )}
-      {jantar_hospedes && (
-        <li className="d-flex align-items-center list-unstyled col pb-4">
-          <div className="px-2">
-            <IconStyle>
-              <FaConciergeBell />
-            </IconStyle>
-          </div>
-          <div className="px-2 m-0">{jantar_hospedes}</div>
-        </li>
-      )}
-    </ul>
+        )}
+      </div>
+    </div>
   </div>
 );
 
-export default About;
+export default Accommodation;

@@ -72,7 +72,7 @@ export const MainPage: React.FC = () => {
             <Card
               title="Espaços para Eventos"
               description="Locais para fazer suas festas ou reuniões"
-              url="/espacos-para-eventos"
+              url="/espacos"
               icon={GiMicrophone}
             />
           </div>
@@ -108,7 +108,7 @@ export const MainPage: React.FC = () => {
             <Card
               title="Sobre a cidade"
               description="Conheça mais sobre Maricá"
-              url="/sobre-a-cidade"
+              url="/sobre"
               icon={AiOutlineInfoCircle}
             />
           </div>
@@ -116,7 +116,7 @@ export const MainPage: React.FC = () => {
       </div>
       <SiteApp>
         <div className="positionOver">
-          <div className="position" />
+          <div className="position d-none d-md-block" />
           <div className="container text-white py-5">
             <div className="row">
               <div className="d-flex flex-column col-md-7 mb-4 mb-md-0">
@@ -158,7 +158,7 @@ export const MainPage: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-5 text-end text-md-right image">
+              <div className="col-md-5 text-center text-md-right image">
                 <img
                   className="img-fluid"
                   src={phone}

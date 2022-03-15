@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 interface IPageTitleProps {
   title: string;
+  label?: string;
   subtitle?: string;
   url?: string;
 }

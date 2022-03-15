@@ -1,4 +1,4 @@
 export type GeneralInfoType = {
-  icone: string;
-  label: string;
+  icone?: string;
+  label?: string;
 };

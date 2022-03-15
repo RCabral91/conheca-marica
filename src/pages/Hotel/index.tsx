@@ -8,7 +8,7 @@ import { DownloadApp } from '../../components/DownloadApp';
 import { Footer } from '../../components/Footer';
 import IframeMaps from '../../components/GoogleMapReact';
 import { Header } from '../../components/Header';
-import HotelSlider from '../../components/HotelSilder';
+import HotelSlider from '../../components/HotelSlider';
 import Informations from '../../components/Informations';
 import LoadingCards from '../../components/LoadingCards';
 import LoadingGate from '../../components/LoadingGate';
@@ -42,13 +42,14 @@ const Hotel: React.FC = () => {
                     <PageTitle
                       title={hotel?.nome ?? 'Carregando...'}
                       subtitle="Hotéis e Pousadas"
+                      url="/hoteis-e-pousadas"
                     />
                   </div>
                   {hotel && (
                     <>
                       <Categories
                         categories={hotel.categorias}
-                        url="/pontos"
+                        url="hoteis-e-pousadas"
                         color="secondary"
                       />
                       <div className="mb-3 fs-5">

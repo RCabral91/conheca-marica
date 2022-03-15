@@ -7,12 +7,15 @@ import { MaricaBackground } from './styles';
 import { useAboutCity } from '../../hooks/AboutCity';
 import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
+import { setTitle } from '../../utils/title';
 
 export const AboutCity: React.FC = () => {
   const { aboutCity, getAboutCity, isLoading } = useAboutCity();
 
   useEffect(() => {
     getAboutCity();
+    setTitle('Sobre a cidade');
+    window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -21,7 +24,7 @@ export const AboutCity: React.FC = () => {
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={<LoadingCards show amount={4} />}
       >
         <MaricaBackground>
           <div className="picture" />

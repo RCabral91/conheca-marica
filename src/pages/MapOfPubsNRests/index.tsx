@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import BigGoogleMap from '../../components/BigGoogleMap';
 import { Header } from '../../components/Header';
-import { useSpots } from '../../hooks/SpotsContext';
+import { usePubsNRests } from '../../hooks/PubsNRestsContext';
 
-const MapOfSpots: React.FC = () => {
-  const { spots, getSpots } = useSpots();
+const MapOfPubsNRests: React.FC = () => {
+  const { pubsNRests, getPubsNRests } = usePubsNRests();
 
   useEffect(() => {
-    getSpots();
+    getPubsNRests();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -15,13 +15,13 @@ const MapOfSpots: React.FC = () => {
     <>
       <Header />
       <BigGoogleMap
-        items={spots}
-        backTo="/pontos-turisticos"
-        title="Pontos Turísticos"
-        type="spot"
+        items={pubsNRests}
+        backTo="/bares-e-restaurantes"
+        title="Bares e Restaurantes"
+        type="pubNRest"
       />
     </>
   );
 };
 
-export default MapOfSpots;
+export default MapOfPubsNRests;

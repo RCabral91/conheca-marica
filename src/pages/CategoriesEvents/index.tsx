@@ -11,6 +11,7 @@ import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
 import { useEvents } from '../../hooks/EventsContext';
 import EventCard from '../../components/EventCard';
+import { setTitle } from '../../utils/title';
 
 const EventsByCategory: React.FC = () => {
   const { events, category, isLoading, getEvents, getEventsByCategory } =
@@ -20,6 +21,9 @@ const EventsByCategory: React.FC = () => {
     getEventsByCategory(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    setTitle(`${category?.label ?? 'Loading...'} | Eventos`);
+  }, [category]);
 
   const handleSearch = (searchText: string): void => {
     getEvents(searchText);
@@ -30,7 +34,7 @@ const EventsByCategory: React.FC = () => {
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={<LoadingCards show amount={4} />}
       >
         <Main>
           <Container>
@@ -46,13 +50,14 @@ const EventsByCategory: React.FC = () => {
               </div>
               <div className="d-flex col-md-6 g-3">
                 <div className="me-3">
-                  <Map />
+                  <Map url="/eventos" />
                 </div>
-
-                <SearchInput
-                  onSearch={handleSearch}
-                  placeholder="Buscar eventos"
-                />
+                <div className="flex-grow-1">
+                  <SearchInput
+                    onSearch={handleSearch}
+                    placeholder="Buscar eventos"
+                  />
+                </div>
               </div>
             </div>
             {isLoading ? (

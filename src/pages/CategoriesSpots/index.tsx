@@ -11,6 +11,7 @@ import PageTitle from '../../components/PageTitle';
 import { SearchInput } from '../../components/SearchInput';
 import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
+import { setTitle } from '../../utils/title';
 
 const SpotsByCategory: React.FC = () => {
   const { spots, category, isLoading, getSpots, getSpotsByCategory } =
@@ -20,6 +21,9 @@ const SpotsByCategory: React.FC = () => {
     getSpotsByCategory(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    setTitle(`${category?.label ?? 'Loading...'} | Pontos Turísticos`);
+  }, [category]);
 
   const handleSearch = (searchText: string): void => {
     getSpots(searchText);
@@ -30,7 +34,7 @@ const SpotsByCategory: React.FC = () => {
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={<LoadingCards show amount={4} />}
       >
         <Main>
           <Container>
@@ -46,13 +50,14 @@ const SpotsByCategory: React.FC = () => {
               </div>
               <div className="d-flex col-md-6 g-3">
                 <div className="me-3">
-                  <Map />
+                  <Map url="/pontos-turisticos/mapa" />
                 </div>
-
-                <SearchInput
-                  onSearch={handleSearch}
-                  placeholder="Buscar pontos turísticos"
-                />
+                <div className="flex-grow-1">
+                  <SearchInput
+                    onSearch={handleSearch}
+                    placeholder="Buscar pontos turísticos"
+                  />
+                </div>
               </div>
             </div>
             {isLoading ? (

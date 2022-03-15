@@ -33,7 +33,7 @@ export const Routes: React.FC = () => {
       <Switch>
         <Route path="/" element={<Home />} />
 
-        {/* Pontos Turísticos */}
+        {/* Tourist Hotspots */}
         <Route path="/pontos-turisticos" element={<TouristHotspots />} />
         <Route path="/pontos-turisticos/:id" element={<TouristHotspot />} />
         <Route
@@ -42,7 +42,7 @@ export const Routes: React.FC = () => {
         />
         <Route path="/pontos-turisticos/mapa" element={<MapOfSpots />} />
 
-        {/* Hotéis e Pousadas */}
+        {/* Hotels and Inn */}
         <Route path="/hoteis-e-pousadas" element={<Hotels />} />
         <Route path="/hoteis-e-pousadas/:id" element={<Hotel />} />
         <Route
@@ -51,7 +51,7 @@ export const Routes: React.FC = () => {
         />
         <Route path="/hoteis-e-pousadas/mapa" element={<MapOfHotels />} />
 
-        {/* Bares e Restaurantes */}
+        {/* Pubs and Restaurants */}
         <Route path="/bares-e-restaurantes" element={<PubsNRests />} />
         <Route path="/bares-e-restaurantes/:id" element={<PubNRest />} />
         <Route

@@ -16,6 +16,7 @@ import Main from '../../components/Main';
 import PageTitle from '../../components/PageTitle';
 import Spaces from '../../components/Spaces';
 import { useEventsSpaces } from '../../hooks/EventsSpaces';
+import { setTitle } from '../../utils/title';
 
 const EventSpace: React.FC = () => {
   const { eventSpace, isLoading, setEventSpace, getEventSpace } =
@@ -26,13 +27,15 @@ const EventSpace: React.FC = () => {
     getEventSpace(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  useEffect(() => {
+    setTitle(`${eventSpace?.nome ?? 'Loading...'} | Espaços para Eventos`);
+  }, [eventSpace]);
   return (
     <>
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={<LoadingCards show amount={4} />}
       >
         <EventPlaceSlider images={eventSpace?.images} />
         <Main>

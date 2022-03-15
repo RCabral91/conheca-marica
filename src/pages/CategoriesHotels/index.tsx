@@ -11,6 +11,7 @@ import LoadingGate from '../../components/LoadingGate';
 import LoadingCards from '../../components/LoadingCards';
 import HotelCard from '../../components/HotelCard';
 import { useHotels } from '../../hooks/HotelsContext';
+import { setTitle } from '../../utils/title';
 
 const HotelsByCategory: React.FC = () => {
   const { hotels, category, isLoading, getHotels, getHotelsByCategory } =
@@ -20,6 +21,9 @@ const HotelsByCategory: React.FC = () => {
     getHotelsByCategory(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    setTitle(`${category?.label ?? 'Loading...'} | Hotéis e Pousadas`);
+  }, [category]);
 
   const handleSearch = (searchText: string): void => {
     getHotels(searchText);
@@ -30,7 +34,7 @@ const HotelsByCategory: React.FC = () => {
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={<LoadingCards show amount={4} />}
       >
         <Main>
           <Container>
@@ -46,13 +50,14 @@ const HotelsByCategory: React.FC = () => {
               </div>
               <div className="d-flex col-md-6 g-3">
                 <div className="me-3">
-                  <Map />
+                  <Map url="/hoteis-e-pousadas/mapa" />
                 </div>
-
-                <SearchInput
-                  onSearch={handleSearch}
-                  placeholder="Buscar hotéis e pousadas"
-                />
+                <div className="flex-grow-1">
+                  <SearchInput
+                    onSearch={handleSearch}
+                    placeholder="Buscar hotéis e pousadas"
+                  />
+                </div>
               </div>
             </div>
             {isLoading ? (

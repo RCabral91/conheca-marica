@@ -15,6 +15,7 @@ import PageTitle from '../../components/PageTitle';
 import { PriceRange } from '../../components/PriceRange';
 import SpotSlider from '../../components/SpotSlider';
 import { usePubsNRests } from '../../hooks/PubsNRestsContext';
+import { setTitle } from '../../utils/title';
 
 const PubNRest: React.FC = () => {
   const { pubNRest, isLoading, setPubNRest, getPubNRest } = usePubsNRests();
@@ -24,13 +25,15 @@ const PubNRest: React.FC = () => {
     getPubNRest(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  useEffect(() => {
+    setTitle(`${pubNRest?.nome ?? 'Loading...'} | Bares e Restaurantes`);
+  }, [pubNRest]);
   return (
     <>
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={<LoadingCards show amount={4} />}
       >
         <SpotSlider images={pubNRest?.images} />
         <Main>
@@ -42,14 +45,14 @@ const PubNRest: React.FC = () => {
                     <PageTitle
                       title={pubNRest?.nome ?? 'Carregando...'}
                       subtitle="Bares e Restaurantes"
-                      url="/restaurantes"
+                      url="/bares-e-restaurantes"
                     />
                   </div>
                   {pubNRest && (
                     <>
                       <Categories
                         categories={pubNRest.categorias}
-                        url="restaurantes"
+                        url="bares-e-restaurantes"
                         color="secondary"
                       />
                       <div className="mb-3 fs-5">

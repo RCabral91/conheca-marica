@@ -15,6 +15,7 @@ import LoadingGate from '../../components/LoadingGate';
 import Main from '../../components/Main';
 import PageTitle from '../../components/PageTitle';
 import { useEvents } from '../../hooks/EventsContext';
+import { setTitle } from '../../utils/title';
 
 export const getDate = (isoDate: string): string => {
   const isInvalid = new Date(isoDate).toString() === 'Invalid Date';
@@ -38,13 +39,16 @@ const Event: React.FC = () => {
     getEvent(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    setTitle(`${event?.nome ?? 'Loading...'} | Eventos`);
+  }, [event]);
 
   return (
     <>
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={<LoadingCards show amount={4} />}
       >
         <EventSlider images={event?.images} />
         <Main>

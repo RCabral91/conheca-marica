@@ -12,12 +12,15 @@ import LoadingCards from '../../components/LoadingCards';
 import EventCard from '../../components/EventCard';
 import { useEvents } from '../../hooks/EventsContext';
 import LoadingPills from '../../components/LoadingPills';
+import { setTitle } from '../../utils/title';
 
 const Events: React.FC = () => {
   const { events, isLoading, categories, getEvents } = useEvents();
 
   useEffect(() => {
     getEvents();
+    setTitle('Eventos');
+    window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -32,9 +35,8 @@ const Events: React.FC = () => {
         waitFor={isLoading === false}
         meanwhile={
           <>
-            <LoadingPills show numberOfCards={3} />
-            <LoadingPills show numberOfCards={12} />
-            <LoadingCards show numberOfCards={4} />
+            <LoadingPills show amount={10} />
+            <LoadingCards show amount={4} />
           </>
         }
       >
@@ -48,13 +50,14 @@ const Events: React.FC = () => {
               </div>
               <div className="d-flex col-md-6 g-3">
                 <div className="me-3">
-                  <Map />
+                  <Map url="/eventos/mapa" />
                 </div>
-
-                <SearchInput
-                  onSearch={handleSearch}
-                  placeholder="Buscar eventos"
-                />
+                <div className="flex-grow-1">
+                  <SearchInput
+                    onSearch={handleSearch}
+                    placeholder="Buscar eventos"
+                  />
+                </div>
               </div>
             </div>
             <Categories

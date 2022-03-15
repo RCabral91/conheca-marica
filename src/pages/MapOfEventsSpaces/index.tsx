@@ -16,9 +16,9 @@ const MapOfEventsSpaces: React.FC = () => {
       <Header />
       <BigGoogleMap
         items={eventsSpaces}
-        backTo="/pontos-turisticos"
-        title="Pontos Turísticos"
-        type="spot"
+        backTo="/eventos"
+        title="Espaços para Eventos"
+        type="event"
       />
     </>
   );

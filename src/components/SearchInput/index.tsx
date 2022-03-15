@@ -26,7 +26,7 @@ export const SearchInput: React.FC<ISearchInputProps> = ({
           <button
             onClick={() => onSearch(searchText)}
             type="button"
-            className="flex-shrink input color-white"
+            className="input color-white"
           >
             <MdSearch />
           </button>

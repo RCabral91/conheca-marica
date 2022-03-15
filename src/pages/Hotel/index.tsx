@@ -15,6 +15,7 @@ import LoadingGate from '../../components/LoadingGate';
 import Main from '../../components/Main';
 import PageTitle from '../../components/PageTitle';
 import { useHotels } from '../../hooks/HotelsContext';
+import { setTitle } from '../../utils/title';
 
 const Hotel: React.FC = () => {
   const { hotel, isLoading, setHotel, getHotel } = useHotels();
@@ -24,13 +25,15 @@ const Hotel: React.FC = () => {
     getHotel(parseInt(id ?? '', 10));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  useEffect(() => {
+    setTitle(`${hotel?.nome ?? 'Loading...'} | Hotéis e Pousadas`);
+  }, [hotel]);
   return (
     <>
       <Header />
       <LoadingGate
         waitFor={isLoading === false}
-        meanwhile={<LoadingCards show numberOfCards={4} />}
+        meanwhile={<LoadingCards show amount={4} />}
       >
         <HotelSlider images={hotel?.images} />
         <Main>

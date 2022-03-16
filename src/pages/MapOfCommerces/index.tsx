@@ -16,7 +16,7 @@ const MapOfCommerces: React.FC = () => {
       <Header />
       <BigGoogleMap
         items={commerces}
-        backTo="/comercios"
+        backTo="/comercio-local"
         title="Comércio Local"
         type="commerce"
       />

@@ -55,7 +55,7 @@ const PubsNRestsByCategory: React.FC = () => {
               </div>
               <div className="d-flex col-md-6 g-3">
                 <div className="me-3">
-                  <Map url="bares-e-restaurantes/mapa" />
+                  <Map url="/bares-e-restaurantes/mapa" />
                 </div>
                 <div className="flex-grow-1">
                   <SearchInput

@@ -81,12 +81,18 @@ const Event: React.FC = () => {
                           <p>{event.descricao_t}</p>
                         </div>
                       )}
-                      <About title="Sobre" addresses={event.addresses} />
+                      <About
+                        title="Sobre"
+                        addresses={event.addresses}
+                        phones={event.phones}
+                        email={event?.email}
+                        network={event.redes}
+                      />
 
-                      {event?.preco_t && (
+                      {event?.gratuito && (
                         <EntryValue
-                          title="Valor de Entrada"
-                          priceToEntry={event.preco_t}
+                          title="Valor da Entrada"
+                          priceToEntry={event.preco_t ?? ''}
                           isFree={!!event.gratuito}
                         />
                       )}

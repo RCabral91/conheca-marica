@@ -50,7 +50,7 @@ const EventsByCategory: React.FC = () => {
               </div>
               <div className="d-flex col-md-6 g-3">
                 <div className="me-3">
-                  <Map url="/eventos" />
+                  <Map url="/eventos/mapa" />
                 </div>
                 <div className="flex-grow-1">
                   <SearchInput
